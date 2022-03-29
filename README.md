@@ -1,2 +1,2 @@
-# GabrielPGarcia
+# Gabriel-Garcia
 Git Repo Training 

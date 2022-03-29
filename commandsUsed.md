@@ -5,6 +5,7 @@ $ cd Gabriel-Garcia
 $ touch commandsUsed.md
 $ pwd
 $ ls
-$ git all
-$ git commit
+$ git status
+$ git all .
+$ git commit -m "info"
 $ git push

@@ -37,7 +37,7 @@ do
             then 
                 echo "$iInput = buzz"
             else
-                echo " $iInput =     "
+                echo " $iInput"
             fi
             iInput=$(( iInput+1 ))
         ;;

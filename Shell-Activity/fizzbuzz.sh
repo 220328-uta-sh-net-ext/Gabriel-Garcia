@@ -1,65 +1,83 @@
 #! /usr/bin/bash
 
-select iMain in loops inputs loop_over exit
+select iMain in loop_till_20 input_1_to_20 inputs loop_over exit
 do
     case $iMain in
-        loops)
-            iC=1
-            until [ $iC -ge 21 ]
+        loop_till_20) #loop 1-20 and output 
+            iInput=1
+            until [ $iInput -ge 21 ]
             do 
-
-                if (($iC % 5 == 0)) && (($iC % 3 == 0))
+                if (($iInput % 5 == 0)) && (($iInput % 3 == 0))
                 then 
-                    echo "$iC = fizzbuzz"
-                elif (($iC % 3 == 0))
+                    echo "$iInput = fizzbuzz"
+                elif (($iInput % 3 == 0))
                 then 
-                    echo "$iC = fizz"
-                elif (($iC % 5 == 0))
+                    echo "$iInput = fizz"
+                elif (($iInput % 5 == 0))
                 then 
-                    echo "$iC = buzz"
+                    echo "$iInput = buzz"
                 else
-                    echo " $iC =  "
+                    echo " $iInput =  "
                 fi
-                iC=$(( iC+1 ))
+                iInput=$(( iInput+1 ))
             done
-
         ;;
-        inputs)
-            read -p "Input Int: " iC
-            if (($iC % 5 == 0)) && (($iC % 3 == 0))
+        input_1_to_20) #Get input from user for 1-20
+            read -p "Input a positve number from 1-20: " iInput
+            if (($iInput <= 0))||(($iInput >= 21))
+            then
+                echo "Sorry! thats not a valid input!"
+            elif (($iInput % 5 == 0)) && (($iInput % 3 == 0))
             then 
-                echo "$iC = fizzbuzz"
-            elif (($iC % 3 == 0))
+                echo "$iInput = fizzbuzz"
+            elif (($iInput % 3 == 0))
             then 
-                echo "$iC = fizz"
-            elif (($iC % 5 == 0))
+                echo "$iInput = fizz"
+            elif (($iInput % 5 == 0))
             then 
-                echo "$iC = buzz"
+                echo "$iInput = buzz"
             else
-                echo " $iC =     "
+                echo " $iInput =     "
             fi
-            iC=$(( iC+1 ))
+            iInput=$(( iInput+1 ))
+        ;;
+        inputs) #Get input from user 
+            read -p "Input a number: " iInput
+            
+            if (($iInput % 5 == 0)) && (($iInput % 3 == 0))
+            then 
+                echo "$iInput = fizzbuzz"
+            elif (($iInput % 3 == 0))
+            then 
+                echo "$iInput = fizz"
+            elif (($iInput % 5 == 0))
+            then 
+                echo "$iInput = buzz"
+            else
+                echo " $iInput =     "
+            fi
+            iInput=$(( iInput+1 ))
         ;;
         loop_over)
-            read -p "Input number of time loop Int: 1 to " iLoop
-            iC=1
+            read -p "loop thought 1 - " iLoop
+            iInput=1
             iLoop=$(( iLoop+1 ))
-            until [ $iC -ge $iLoop ]
+            until [ $iInput -ge $iLoop ]
             do 
 
-                if (($iC % 5 == 0)) && (($iC % 3 == 0))
+                if (($iInput % 5 == 0)) && (($iInput % 3 == 0))
                 then 
-                    echo "$iC = fizzbuzz"
-                elif (($iC % 3 == 0))
+                    echo "$iInput = fizzbuzz"
+                elif (($iInput % 3 == 0))
                 then 
-                    echo "$iC = fizz"
-                elif (($iC % 5 == 0))
+                    echo "$iInput = fizz"
+                elif (($iInput % 5 == 0))
                 then 
-                    echo "$iC = buzz"
+                    echo "$iInput = buzz"
                 else
-                    echo " $iC =  "
+                    echo " $iInput =  "
                 fi
-                iC=$(( iC+1 ))
+                iInput=$(( iInput+1 ))
             done
         ;;
         exit)
@@ -67,7 +85,7 @@ do
             break
         ;;
         *)
-            echo "Error: Please try again"
+            echo "Error: Please try again (1-5)"
         ;;
     esac
 done

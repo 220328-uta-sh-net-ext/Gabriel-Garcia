@@ -7,6 +7,7 @@ namespace HelloWorld
         public static void Main()
         {
             Console.WriteLine("Hello World!");
+            Mathematics.Add();
         }
     }
 }

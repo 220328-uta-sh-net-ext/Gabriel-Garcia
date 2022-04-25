@@ -10,8 +10,10 @@ namespace RestaurantUI
     {
         public void DisplayStartMenu()
         {
-            Console.WriteLine("This is Start Menu");
-            Console.WriteLine(" 0 - 1 - 2 options");
+            Console.WriteLine("Welcome to Restaurant Review");
+            Console.WriteLine("Create User:\t 2");
+            Console.WriteLine("Login User:\t 1");
+            Console.WriteLine("Exit:\t\t 0");
         }
         public void DisplayUserMenu()
         {
@@ -36,10 +38,9 @@ namespace RestaurantUI
                     Console.Clear();
                     return "Create User";
                 default:
-                    Console.WriteLine($"Your input '{sUserInput}' is invalid input");
-                    Console.WriteLine($"do things...");
-                    Console.WriteLine($"Would you like to exit");
-                    return "MainMenu";
+                    Console.Clear();
+                    Console.WriteLine($"Your input '{sUserInput}' is invalid!");
+                    return "LoginMenu";
             }
         }
         public string UserChoiceLogedin()
@@ -51,21 +52,14 @@ namespace RestaurantUI
                     return "Exit";
                 case "1":
                     Console.Clear();
-                    return "Print User Info";
+                    return "DeleteAccount";
                 case "2":
                     Console.Clear();
-                    return "Request to add a restaurant";
-                case "3":
-                    Console.Clear();
-                    return "Review a Restaurant";
-                case "4":
-                    Console.Clear();
-                    return "Reviewed Restaurants";
+                    return "Restaurant as User";
                 default:
-                    Console.WriteLine($"Your input '{sUserInput}' is invalid input");
-                    Console.WriteLine($"do things...");
-                    Console.WriteLine($"Would you like to exit");
-                    return "MainMenu";
+                    Console.Clear();
+                    Console.WriteLine($"Your input '{sUserInput}' is invalid!");
+                    return "UserMenu";
             }
         }
         public string AdminUserLoggin()

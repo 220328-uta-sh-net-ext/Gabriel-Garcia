@@ -17,14 +17,53 @@ while(bLoop)
         case "Exit":
             bLoop = false;
             break;
+        case "LoginMenu":
+            //do this
+            break;
         case "Loggin User":
-            GetRestReview.GetAllRestorant();
+            //do this;
             break;
         case "Create User":
-            GetRestReview.GetAllRestorant();
+            //do this
             break;
         case "DisplayRestaurant":
-            GetRestReview.GetAllRestorant();
+            //do this
+            break;
+        case "UserMenu":
+            //do this
+            break;
+        case "DeleteAccount":
+            //do this;
+            break;
+        case "Restaurant as User":
+            //do this
+            break;
+        case "Request a Restaurant":
+            //do this
+            break;
+        case "view details of Restaurant":
+            //do this
+            break;
+        case "view reviews of Restaurant":
+            //do this
+            break;
+        case "find a Restaurant":
+            //do this
+            break;
+        case "AdminMenu":
+            //do this
+            break;
+        case "Admin search user":
+            //do this
+            break;
+        case "Restaurant Menu":
+            //do this
+            break;
+        case "Add a Restaurant":
+            //do this
+            break;
+        case "Add a Restaurant Requested":
+            //do this
             break;
         default:
             Console.WriteLine("invalide input...");

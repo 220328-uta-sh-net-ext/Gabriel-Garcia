@@ -1,31 +1,30 @@
 ﻿using RestaurantUI;
+MainMenu menu = new MainMenu();
+bool bLoop = true;
 
-Menu menu = new MainMenu();
-bool repeat = true;
-
-menu.Display();
-while (repeat)
+menu.DisplayStartMenu();
+bool logingin= true;
+string sGetInput;
+while(bLoop)
 {
-    string ans = menu.UserChoice();
+    if (logingin)
+        sGetInput = menu.UserChoiceLogingin();
+    else 
+        sGetInput = menu.UserChoiceLogedin();
 
-    switch(ans)
+    switch (sGetInput)
     {
-        case "Loggin":
-            Console.WriteLine("Login...");
-            break;
-        case "New User":
-            Console.WriteLine("Creating new User...");
-            break;
-        case "MainMenu":
-            menu = new MainMenu();
-            menu.Display();
-            break;
-        case "PrintRestaurantList":
-            menu = new MainMenu();
-            menu.Display();
-            break;
         case "Exit":
-            repeat = false;
+            bLoop = false;
+            break;
+        case "Loggin User":
+            GetRestReview.GetAllRestorant();
+            break;
+        case "Create User":
+            GetRestReview.GetAllRestorant();
+            break;
+        case "DisplayRestaurant":
+            GetRestReview.GetAllRestorant();
             break;
         default:
             Console.WriteLine("invalide input...");

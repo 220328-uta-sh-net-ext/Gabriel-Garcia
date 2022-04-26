@@ -17,8 +17,5 @@ namespace RestaurantUI
         string UserChoiceLogedin();
         string UserChoiceLogingin();
         string AdminUserLoggin();
-        string RestaurantRevMenu();
-        string RestaurantRequest();
-        string MyReviewedRestaurant();
     }
 }

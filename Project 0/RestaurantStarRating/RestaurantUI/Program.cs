@@ -3,14 +3,18 @@ MainMenu menu = new MainMenu();
 bool bLoop = true;
 
 menu.DisplayStartMenu();
-bool logingin= true;
+bool logingIn = true;
+bool isAdmin = false;
 string sGetInput;
 while(bLoop)
 {
-    if (logingin)
-        sGetInput = menu.UserChoiceLogingin();
-    else 
+    if (!logingIn && isAdmin)
+        sGetInput = menu.AdminUserLoggin();
+    else if(!logingIn && !isAdmin)
         sGetInput = menu.UserChoiceLogedin();
+    else
+        sGetInput = menu.UserChoiceLogingin();
+
 
     switch (sGetInput)
     {
@@ -18,52 +22,40 @@ while(bLoop)
             bLoop = false;
             break;
         case "LoginMenu":
-            //do this
+            menu.DisplayStartMenu();
+            logingIn = true;
             break;
         case "Loggin User":
-            //do this;
+            Console.WriteLine($"logging in to user");
+            logingIn = false;
+            isAdmin = true;
             break;
         case "Create User":
-            //do this
-            break;
-        case "DisplayRestaurant":
-            //do this
+            Console.WriteLine($"creating user");
             break;
         case "UserMenu":
-            //do this
+            menu.DisplayUserMenu();
             break;
-        case "DeleteAccount":
-            //do this;
+        case "Rate a Restaurant":
+            Console.WriteLine($"sedding user to rate rest..");
             break;
-        case "Restaurant as User":
-            //do this
+        case "Restaurant's Review":
+            Console.WriteLine($"sedding user to restaurants rev..");
             break;
-        case "Request a Restaurant":
-            //do this
-            break;
-        case "view details of Restaurant":
-            //do this
-            break;
-        case "view reviews of Restaurant":
-            //do this
-            break;
-        case "find a Restaurant":
-            //do this
+        case "Restaurant's Detail":
+            Console.WriteLine($"sedding user to restaurants de..");
             break;
         case "AdminMenu":
-            //do this
-            break;
-        case "Admin search user":
-            //do this
-            break;
-        case "Restaurant Menu":
-            //do this
+            menu.DisplayAdminMenu();
             break;
         case "Add a Restaurant":
-            //do this
+            Console.WriteLine($"adding a Restaurant");
             break;
-        case "Add a Restaurant Requested":
-            //do this
+        case "Search User":
+            Console.WriteLine($"looking for a user");
+            break;
+        case "See All User":
+            Console.WriteLine($"see all users");
             break;
         default:
             Console.WriteLine("invalide input...");

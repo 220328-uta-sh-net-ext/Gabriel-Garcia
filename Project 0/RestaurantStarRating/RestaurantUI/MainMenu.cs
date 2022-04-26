@@ -18,12 +18,24 @@ namespace RestaurantUI
         public void DisplayUserMenu()
         {
             Console.WriteLine("This is User Menu");
+            Console.WriteLine("Rate a Restaurant:\t 3");
+            Console.WriteLine("Restaurant's Review:\t 2");
+            Console.WriteLine("Restaurant's Detail:\t 1");
+            Console.WriteLine("Exit:\t\t 0");
         }
         public void DisplayAdminMenu()
         {
             Console.WriteLine("This is Admin Menu");
+            Console.WriteLine("See All User:\t 6");
+            Console.WriteLine("Search User:\t 5");
+            Console.WriteLine("Restaurant's Detail:\t 4");
+            Console.WriteLine("Restaurant's Review:\t 3");
+            Console.WriteLine("Rate a Restaurant:\t 2");
+            Console.WriteLine("Add a Restaurant:\t 1");
+            Console.WriteLine("Exit:\t\t 0");
         }
-       
+
+
         public string UserChoiceLogingin()
         {
             string sUserInput = Console.ReadLine();
@@ -52,10 +64,13 @@ namespace RestaurantUI
                     return "Exit";
                 case "1":
                     Console.Clear();
-                    return "DeleteAccount";
+                    return "Rate a Restaurant";
                 case "2":
                     Console.Clear();
-                    return "Restaurant as User";
+                    return "Restaurant's Review";
+                case "3":
+                    Console.Clear();
+                    return "Restaurant's Detail";
                 default:
                     Console.Clear();
                     Console.WriteLine($"Your input '{sUserInput}' is invalid!");
@@ -71,64 +86,28 @@ namespace RestaurantUI
                     return "Exit";
                 case "1":
                     Console.Clear();
-                    return "Print User Info";
-                default:
-                    Console.WriteLine($"Your input '{sUserInput}' is invalid input");
-                    Console.WriteLine($"do things...");
-                    Console.WriteLine($"Would you like to exit");
-                    return "MainMenu";
-            }
-        }
-        public string RestaurantRevMenu()
-        {
-            string sUserInput = Console.ReadLine();
-            switch (sUserInput)
-            {
-                case "0":
-                    return "Exit";
-                case "1":
+                    return "Add a Restaurant";
+                case "2":
                     Console.Clear();
-                    return "Print User Info";
-                default:
-                    Console.WriteLine($"Your input '{sUserInput}' is invalid input");
-                    Console.WriteLine($"do things...");
-                    Console.WriteLine($"Would you like to exit");
-                    return "MainMenu";
-            }
-        }
-        public string RestaurantRequest()
-        {
-            string sUserInput = Console.ReadLine();
-            switch (sUserInput)
-            {
-                case "0":
-                    return "Exit";
-                case "1":
+                    return "Rate a Restaurant";
+                case "3":
                     Console.Clear();
-                    return "Print User Info";
-                default:
-                    Console.WriteLine($"Your input '{sUserInput}' is invalid input");
-                    Console.WriteLine($"do things...");
-                    Console.WriteLine($"Would you like to exit");
-                    return "MainMenu";
-            }
-        }
-        public string MyReviewedRestaurant()
-        {
-            string sUserInput = Console.ReadLine();
-            switch (sUserInput)
-            {
-                case "0":
-                    return "Exit";
-                case "1":
+                    return "Restaurant's Review";
+                case "4":
                     Console.Clear();
-                    return "Print User Info";
+                    return "Restaurant's Detail";
+                case "5":
+                    Console.Clear();
+                    return "Search User";
+                case "6":
+                    Console.Clear();
+                    return "See All User";
                 default:
-                    Console.WriteLine($"Your input '{sUserInput}' is invalid input");
-                    Console.WriteLine($"do things...");
-                    Console.WriteLine($"Would you like to exit");
-                    return "MainMenu";
+                    Console.Clear();
+                    Console.WriteLine($"Your input '{sUserInput}' is invalid!");
+                    return "AdminMenu";
             }
         }
+
     }
 }

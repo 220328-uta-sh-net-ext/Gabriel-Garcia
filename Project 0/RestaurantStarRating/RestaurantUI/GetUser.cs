@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using UserDL;
+using UserML;
 
-namespace RestaurantUI
+namespace RestaurantUI 
 {
     internal class GetUser
     {
+        private static UserRepo repository = new UserRepo();
+        public static void GetAllUser()
+        {
+            repository.GetAllUser();
+        }
     }
 }

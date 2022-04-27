@@ -8,7 +8,7 @@
         public string sState { get; set; }
         public string sZipcode { get; set; }
         public string sType { get; set; }
-        public string Review { get; set; }
+        public string sReview { get; set; }
         public string NumberOfReview { get; set; }
 
         public Restaurant()
@@ -19,12 +19,12 @@
             sState = "";
             sZipcode = "";
             sType = "";
-            Review = "";
+            sReview = "";
             NumberOfReview = "";
         }
         public override string ToString()
         {
-            return $"Name:{Name}\nID:{ID}\nAddress:{Address}\nZippcode:{Zipcode}\nReview:{Review}\nNumberOfReview:{NumberOfReview}";
+            return $"Name:{sName}\nID:{sID}\nContry:{sContry}\nState:{sState}\nZipcode:{sZipcode}\nType:{sType}\nReview:{sReview}";
         }
 
     }

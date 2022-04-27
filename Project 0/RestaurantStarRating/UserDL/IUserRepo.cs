@@ -3,9 +3,9 @@ using UserML;
 
 namespace UserDL
 {
-    internal interface IUserRepo
+    public interface IUserRepo
     {
         User AddUser(User rest);
-        List<User> GetAllRestaurants();
+        List<User> GetAllUser();
     }
 }

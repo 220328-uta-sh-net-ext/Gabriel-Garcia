@@ -24,7 +24,7 @@ namespace UserML
         }
         public override string ToString()
         {
-            return $"{ID}....";
+            return $"First Name:{FirstName}\nLast Name:{LastName}\nUser Name:{UserName}\nUser ID:{ID}\nPassword:{Password}";
         }
     }
 }

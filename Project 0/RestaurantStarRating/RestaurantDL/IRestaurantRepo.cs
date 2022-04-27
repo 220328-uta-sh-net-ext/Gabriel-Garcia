@@ -3,7 +3,7 @@ using RestaurantML;
 
 namespace RestaurantDL
 {
-    internal interface IRestaurantRepo
+    public interface IRestaurantRepo
     {
         Restaurant AddRestaurant(Restaurant rest);
         List<Restaurant> GetAllRestaurants();

@@ -12,14 +12,14 @@ namespace UserDL
         private string sJsonString = "";
         public User AddUser(User uUser)
         {
-            var vUser = GetAllRestaurants();
+            var vUser = GetAllUser();
             vUser.Add(uUser);
             var vUserString = JsonSerializer.Serialize<List<User>>(vUser, new JsonSerializerOptions { WriteIndented = true });
             File.WriteAllText(sFilePath + "UserData.json", vUserString);
             return uUser;
         }
 
-        public List<User> GetAllRestaurants()
+        public List<User> GetAllUser()
         {
             try
             {

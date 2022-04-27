@@ -15,7 +15,17 @@ namespace RestaurantDL
             var vRestaurants = GetAllRestaurants();
             vRestaurants.Add(rest);
             var vRestaurantString = JsonSerializer.Serialize<List<Restaurant>>(vRestaurants,new JsonSerializerOptions {WriteIndented=true});
-            File.WriteAllText(sFilePath+"Restaurant.json",vRestaurantString);
+            try { 
+                File.WriteAllText(sFilePath+"Restaurant.json",vRestaurantString);
+            }
+            catch (DirectoryNotFoundException ex)
+            {
+                Console.WriteLine("Please check the path, " + ex.Message);
+            }
+            catch (FileNotFoundException ex)
+            {
+                Console.WriteLine("Please check the file name" + ex.Message);
+            }
             return rest;
         }
 

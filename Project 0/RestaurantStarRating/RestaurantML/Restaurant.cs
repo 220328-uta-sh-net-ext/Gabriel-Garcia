@@ -2,19 +2,23 @@
 {
     public class Restaurant
     {
-        public string Name { get; set; }
-        public string ID { get; set; }
-        public string Address { get; set; }
-        public string Zipcode { get; set; }
+        public string sName { get; set; }
+        public string sID { get; set; }
+        public string sContry { get; set; }
+        public string sState { get; set; }
+        public string sZipcode { get; set; }
+        public string sType { get; set; }
         public string Review { get; set; }
         public string NumberOfReview { get; set; }
 
         public Restaurant()
         {
-            Name = "";
-            ID = "";
-            Address = "";
-            Zipcode = "";
+            sName = "";
+            sID = "";
+            sContry = "";
+            sState = "";
+            sZipcode = "";
+            sType = "";
             Review = "";
             NumberOfReview = "";
         }

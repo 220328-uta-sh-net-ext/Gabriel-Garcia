@@ -1,4 +1,5 @@
 ﻿using RestaurantDL;
+using RestaurantML;
 
 namespace RestaurantUI
 {
@@ -9,5 +10,6 @@ namespace RestaurantUI
         {
             repository.GetAllRestaurants();
         }
+
     }
 }

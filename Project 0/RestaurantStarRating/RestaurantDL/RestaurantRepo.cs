@@ -9,29 +9,34 @@ namespace RestaurantDL
     public class RestaurantRepo : IRestaurantRepo
     {
         private string sFilePath = @"..\..\..\..\RestaurantDL\Database\";
-        private string sJSONstring = "";
-        public Restaurant AddRestaurant(Restaurant rest)
+        private string sJsonString = "";
+        public Restaurant AddRestaurant(Restaurant rest)//serialization
         {
-            throw new NotImplementedException();
+            var vRestaurants = GetAllRestaurants();
+            vRestaurants.Add(rest);
+            var vRestaurantString = JsonSerializer.Serialize<List<Restaurant>>(vRestaurants,new JsonSerializerOptions {WriteIndented=true});
+            File.WriteAllText(sFilePath+"Restaurant.json",vRestaurantString);
+            return rest;
         }
 
-        public void GetAllRestaurants()
+        public List<Restaurant> GetAllRestaurants()//desrialization
         {
-            // try 
-            //  {
-            //File.Create(sFilePath + "k2Rest.json");
-                sJSONstring = File.ReadAllText(sFilePath+"Restaurant.json");
-                Console.WriteLine(sJSONstring);
-          //  }
-           // catch (Exception ex)
-           // {
-            //    Console.WriteLine("Please check the path, " + ex.Message);
-           // }
-        }
-
-        List<Restaurant> IRestaurantRepo.GetAllRestaurants()
-        {
-            throw new NotImplementedException();
+            try 
+            {
+                sJsonString = File.ReadAllText(sFilePath+"Restaurant.json");
+            }
+            catch (DirectoryNotFoundException ex)
+            {
+                Console.WriteLine("Please check the path, " + ex.Message);
+            }
+            catch(FileNotFoundException ex)
+            {
+                Console.WriteLine("Please check the file name" + ex.Message);
+            }
+            if (!string.IsNullOrEmpty(sJsonString))
+                return JsonSerializer.Deserialize<List<Restaurant>>(sJsonString);
+            else
+                return null;
         }
     }
 }

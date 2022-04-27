@@ -5,7 +5,7 @@ namespace UserDL
 {
     public interface IUserRepo
     {
-        User AddUser(User rest);
+        User AddUser(User uUser);
         List<User> GetAllUser();
     }
 }

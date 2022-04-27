@@ -7,7 +7,7 @@ using RestaurantML;
 
 namespace RestaurantBL
 {
-    internal interface IRestaurantLogic
+    public interface IRestaurantLogic
     {
         Restaurant AddRestaurant(Restaurant r);
         List<Restaurant> SearchRestaurant(string name,string id);

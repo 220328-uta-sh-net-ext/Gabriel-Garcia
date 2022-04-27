@@ -8,12 +8,14 @@ namespace RestaurantBL
         IRestaurantRepo repo = new RestaurantRepo();
         public Restaurant AddRestaurant(Restaurant r)
         {
-            throw new NotImplementedException();
+            return repo.AddRestaurant(r);
         }
 
         public List<Restaurant> SearchRestaurant(string name, string id)
         {
-            throw new NotImplementedException();
+            var vRestaurant = repo.GetAllRestaurants();
+            var vfilteredRestaurant = vRestaurant.Where(r => r.sName.Contains(name)).ToList();
+            return vfilteredRestaurant;
         }
     }
 }

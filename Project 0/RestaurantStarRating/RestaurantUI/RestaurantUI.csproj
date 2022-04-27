@@ -8,7 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\RestaurantBL\RestaurantBL.csproj" />
     <ProjectReference Include="..\RestaurantDL\RestaurantDL.csproj" />
+    <ProjectReference Include="..\UserBL\UserBL.csproj" />
     <ProjectReference Include="..\UserDL\UserDL.csproj" />
   </ItemGroup>
 

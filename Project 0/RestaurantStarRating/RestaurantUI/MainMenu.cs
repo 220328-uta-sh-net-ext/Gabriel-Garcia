@@ -27,11 +27,11 @@ namespace RestaurantUI
                     return "Loggin User";
                 case "2":
                     Console.Clear();
-                    return "Create User";
+                    return "Add Restaurant";
                 default:
                     Console.Clear();
                     Console.WriteLine($"Your input '{sUserInput}' is invalid!");
-                    return "LoginMenu";
+                    return "MainMenu";
             }
         }
         public void DisplayAdminMenu()

@@ -1,14 +1,13 @@
 ﻿using RestaurantUI;
-MainMenu menu = new MainMenu();
+IMenu menu = new MainMenu();
 bool bLoop = true;
 
-menu.Display();
 //bool logingIn = true;
 //bool isAdmin = false;
-string sGetInput;
 while(bLoop)
 {
-    sGetInput = menu.UserChoice();
+    menu.Display();
+    string sGetInput = menu.UserChoice();
     /*if (!logingIn && isAdmin)
         sGetInput = menu.AdminUserLoggin();
     else if(!logingIn && !isAdmin)
@@ -22,24 +21,26 @@ while(bLoop)
         case "Exit":
             bLoop = false;
             break;
-        case "LoginMenu":
-            //menu.DisplayStartMenu();
-            //logingIn = true;
+        case "MainMenu":
+            menu = new MainMenu();
             break;
         case "Loggin User":
-            Console.WriteLine($"logging in to user");
-            //logingIn = false;
-            //isAdmin = true;
             break;
         case "Create User":
-            Console.WriteLine($"creating user");
+            menu = new AddUser();
             break;
-        case "UserMenu":
+        case "Add Restaurant":
+            menu = new AddRestaurant();
+            break;
+        case "Add Location":
+            menu = new AddLocationForRestaurant();
+            break;
+        /*case "Add Location":
             //menu.DisplayUserMenu();
             break;
         case "Rate a Restaurant":
             Console.WriteLine($"sedding user to rate rest..");
-            GetRestReview.GetAllRestorant();
+            //GetRestReview.GetAllRestorant();
             break;
         case "Restaurant's Review":
             Console.WriteLine($"sedding user to restaurants rev..");
@@ -51,7 +52,7 @@ while(bLoop)
             Console.WriteLine($"sedding user to restaurants de..");
             break;
         case "AdminMenu":
-            menu.DisplayAdminMenu();
+            //menu.DisplayAdminMenu();
             break;
         case "Add a Restaurant":
             Console.WriteLine($"adding a Restaurant");
@@ -61,7 +62,7 @@ while(bLoop)
             break;
         case "See All User":
             Console.WriteLine($"see all users");
-            break;
+            break;*/
         default:
             Console.WriteLine("invalide input...");
             Console.ReadLine();

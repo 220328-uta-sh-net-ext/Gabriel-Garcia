@@ -4,12 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UserML;
+using UserBL;
 
 namespace RestaurantUI
 {
     internal class AddUser : IMenu
     {
-        public static User newUser = new User();
+        private static User newUser = new User();
+        private IUserLogic _repo = new UserLogic();
         public void Display()
         {
             Console.WriteLine("Adding a New Account\n");
@@ -20,7 +22,6 @@ namespace RestaurantUI
             Console.WriteLine("<2> Password: ");
             Console.WriteLine("<1> Create Account");
             Console.WriteLine("<0> Go Back");
-            Console.WriteLine();
         }
 
         public string UserChoice()
@@ -29,26 +30,38 @@ namespace RestaurantUI
             switch (sUserInput)
             {
                 case "0":
+                    Console.Clear();
                     return "MainMenu";
                 case "1":
-                    Console.Clear();
-                    return "Create Account";
+                    try 
+                    {
+                        _repo.AddUser(newUser);
+                    }
+                    catch(Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
+                    return "MainMenu";
                 case "2":
-                    Console.Clear();
-                    return "Password";
+                    Console.Write("Enter a Password: ");
+                    newUser.Password = Console.ReadLine();
+                    return "Create User";
                 case "3":
-                    Console.Clear();
-                    return "User Name";
+                    Console.Write("Enter a Loggin Name: ");
+                    newUser.UserName = Console.ReadLine();
+                    return "Create User";
                 case "4":
-                    Console.Clear();
-                    return "Last Name";
+                    Console.Write("Enter Last Name: ");
+                    newUser.LastName = Console.ReadLine();
+                    return "Create User";
                 case "5":
-                    Console.Clear();
-                    return "First Name";
+                    Console.Write("Enter First Name: ");
+                    newUser.FirstName = Console.ReadLine();
+                    return "Create User";
                 default:
                     Console.Clear();
                     Console.WriteLine($"Your input '{sUserInput}' is invalid!");
-                    return "LoginMenu";
+                    return "Create User";
             }
         }
     }

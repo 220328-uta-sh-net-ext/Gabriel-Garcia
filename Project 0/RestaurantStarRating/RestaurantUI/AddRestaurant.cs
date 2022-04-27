@@ -4,23 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using RestaurantML;
-using RestaurantDL;
+using RestaurantBL;
 
 namespace RestaurantUI
 {
     internal class AddRestaurant : IMenu
     {
         private static Restaurant newRestaurant = new Restaurant();
-        private IRestaurantRepo _reposityory = new Restaurant();//up casting
+        private IRestaurantLogic _reposityory = new RestaurantLogic();//up casting
 
         public void Display()
         {
-        Console.WriteLine("Adding a New Restaurant\n");
+            Console.WriteLine("Adding a New Restaurant\n");
 
-            Console.WriteLine("<6> Restaurant's Name: ");
-            Console.WriteLine("<5> Country: ");
-            Console.WriteLine("<4> State: " );
-            Console.WriteLine("<3> Zipcode: ");
+            Console.WriteLine("<4> Restaurant's Name: ");
+            Console.WriteLine($"<3> Add Location: {AddLocationForRestaurant.newLocation.sContry} {AddLocationForRestaurant.newLocation.sState} {AddLocationForRestaurant.newLocation.sZipcode}");
             Console.WriteLine("<2> Type's: ");
             Console.WriteLine("<1> Add Restaurant");
             Console.WriteLine("<0> Go Back");
@@ -33,34 +31,34 @@ namespace RestaurantUI
             switch (sUserInput)
             {
                 case "0":
+                    Console.Clear();
                     return "MainMenu";
                 case "1":
-                    _reposityory.AddRestaurant(newRestaurant);
+                    try 
+                    { 
+                        _reposityory.AddRestaurant(newRestaurant);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
+                    Console.Clear();
                     return "MainMenu";
                 case "2":
                     Console.Write("Enter type: ");
                     newRestaurant.sType = Console.ReadLine();
-                    return "AddRestaurant";
+                    return "Add Restaurant";
                 case "3":
-                    Console.Write("Enter Zipcode: ");
-                    newRestaurant.sZipcode = Console.ReadLine();
-                    return "AddRestaurant";
+                    Console.Clear();
+                    return "Add Location";
                 case "4":
-                    Console.Write("Enter State: ");
-                    newRestaurant.sState = Console.ReadLine();
-                    return "AddRestaurant";
-                case "5":
-                    Console.Write("Enter Country: ");
-                    newRestaurant.sContry = Console.ReadLine();
-                    return "AddRestaurant";
-                case "6":
                     Console.Write("Enter Name: ");
                     newRestaurant.sName = Console.ReadLine();
-                    return "AddRestaurant";
+                    return "Add Restaurant";
                 default:
                     Console.Clear();
                     Console.WriteLine($"Your input '{sUserInput}' is invalid!");
-                    return "AddRestaurant";
+                    return "Add Restaurant";
             }
         }
     }

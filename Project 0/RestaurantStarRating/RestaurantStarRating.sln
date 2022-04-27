@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaurantBL", "RestaurantB
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserBL", "UserBL\UserBL.csproj", "{AC12CA65-0A74-4767-835D-B1CBE8B38AD4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserTest", "UserTest\UserTest.csproj", "{B51AFB19-E8F9-4115-96EC-9F81736DA5AE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{AC12CA65-0A74-4767-835D-B1CBE8B38AD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC12CA65-0A74-4767-835D-B1CBE8B38AD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC12CA65-0A74-4767-835D-B1CBE8B38AD4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B51AFB19-E8F9-4115-96EC-9F81736DA5AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B51AFB19-E8F9-4115-96EC-9F81736DA5AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B51AFB19-E8F9-4115-96EC-9F81736DA5AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B51AFB19-E8F9-4115-96EC-9F81736DA5AE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

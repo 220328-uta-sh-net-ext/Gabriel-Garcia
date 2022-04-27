@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\UserDL\UserDL.csproj" />
+    <ProjectReference Include="..\UserML\UserML.csproj" />
+  </ItemGroup>
+
 </Project>

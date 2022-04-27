@@ -8,14 +8,15 @@ namespace RestaurantDL
 {
     public class RestaurantRepo : IRestaurantRepo
     {
-        private string sFilePath = @"..\..\..\..\RestaurantDL\Database\";
-        private string sJsonString = "";
+        private string sFilePath = "../../../../RestaurantDL/Database/";
+        private string sJsonString;
         public Restaurant AddRestaurant(Restaurant rest)//serialization
         {
             var vRestaurants = GetAllRestaurants();
             vRestaurants.Add(rest);
             var vRestaurantString = JsonSerializer.Serialize<List<Restaurant>>(vRestaurants,new JsonSerializerOptions {WriteIndented=true});
-            try { 
+            try 
+            { 
                 File.WriteAllText(sFilePath+"Restaurant.json",vRestaurantString);
             }
             catch (DirectoryNotFoundException ex)

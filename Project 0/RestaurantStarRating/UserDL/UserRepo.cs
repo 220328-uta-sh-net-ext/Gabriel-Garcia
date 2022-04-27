@@ -8,14 +8,29 @@ namespace UserDL
 {
     public class UserRepo : IUserRepo
     {
-        private string sFilePath = @"..\..\..\..\RestaurantDL\Database\";
-        private string sJsonString = "";
+        private string sFilePath = "../../../../UserDL/UserDatabase/";
+        private string sJsonString;
         public User AddUser(User uUser)
         {
             var vUser = GetAllUser();
             vUser.Add(uUser);
             var vUserString = JsonSerializer.Serialize<List<User>>(vUser, new JsonSerializerOptions { WriteIndented = true });
-            File.WriteAllText(sFilePath + "UserData.json", vUserString);
+            try
+            { 
+                File.WriteAllText(sFilePath + "UserData.json", vUserString);
+            }
+            catch (DirectoryNotFoundException ex)
+            {
+                Console.WriteLine("Please check the path, " + ex.Message);
+            }
+            catch (FileNotFoundException ex)
+            {
+                Console.WriteLine("Please check the file name, " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
             return uUser;
         }
 

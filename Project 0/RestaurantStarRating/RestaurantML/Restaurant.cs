@@ -2,33 +2,27 @@
 {
     public class Restaurant
     {
-        public string sName { get; set; }
-        public string sID { get; set; }
-        public string sType { get; set; }
-        public string sReview { get; set; }
+        public string Name { get; set; }
+        public string ID { get; set; }
+        public string Type { get; set; }
+        public string Review { get; set; }
         public string NumberOfReview { get; set; }
         private List<Location> _locations;
         public List<Location> Locations
-        {
-            get => _locations;
-            set 
-            {
-                _locations = value; 
-            } 
-        } 
+            { get => _locations; set { _locations = value; } }
         public Restaurant()
         {
-            sName = "";
-            sID = "";
-            sType = "";
-            sReview = "";
+            Name = "";
+            ID = "";
+            Type = "";
+            Review = "";
             NumberOfReview = "";
             _locations = new List<Location>()
             { new Location()};
         }
         public override string ToString()
         {
-            return $"Name:{sName}\nID:{sID}\nType:{sType}\nReview:{sReview}";
+            return $"Name:{Name}\nID:{ID}\nType:{Type}\nReview:{Review}";
         }
 
     }

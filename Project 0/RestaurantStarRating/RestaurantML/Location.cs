@@ -8,14 +8,14 @@ namespace RestaurantML
 {
     public class Location
     {
-        public string sContry { get; set; }
-        public string sState { get; set; }
-        public string sZipcode { get; set; }
+        public string Contry { get; set; }
+        public string State { get; set; }
+        public string Zipcode { get; set; }
         public Location()
         {
-            sContry = "";
-            sState = "";
-            sZipcode = "";
+            Contry = "";
+            State = "";
+            Zipcode = "";
         }
     }
 }

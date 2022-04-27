@@ -14,7 +14,7 @@ namespace RestaurantBL
         public List<Restaurant> SearchRestaurant(string name, string id)
         {
             var vRestaurant = repo.GetAllRestaurants();
-            var vfilteredRestaurant = vRestaurant.Where(r => r.sName.Contains(name)).ToList();
+            var vfilteredRestaurant = vRestaurant.Where(r => r.Name.Contains(name)).ToList();
             return vfilteredRestaurant;
         }
     }

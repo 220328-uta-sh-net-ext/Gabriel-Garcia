@@ -24,10 +24,10 @@ namespace RestaurantUI
                     return "Exit";
                 case "1":
                     Console.Clear();
-                    return "Loggin User";
+                    return "Login User";
                 case "2":
                     Console.Clear();
-                    return "Add Restaurant";
+                    return "Create User";
                 default:
                     Console.Clear();
                     Console.WriteLine($"Your input '{sUserInput}' is invalid!");

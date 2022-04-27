@@ -11,15 +11,16 @@ namespace RestaurantUI
     internal class AddRestaurant : IMenu
     {
         private static Restaurant newRestaurant = new Restaurant();
-        private IRestaurantLogic _reposityory = new RestaurantLogic();//up casting
+        public static Location newLocation = new Location();
+        private IRestaurantLogic _repository = new RestaurantLogic();//up casting
 
         public void Display()
         {
             Console.WriteLine("Adding a New Restaurant\n");
 
-            Console.WriteLine("<4> Restaurant's Name: ");
-            Console.WriteLine($"<3> Add Location: {AddLocationForRestaurant.newLocation.sContry} {AddLocationForRestaurant.newLocation.sState} {AddLocationForRestaurant.newLocation.sZipcode}");
-            Console.WriteLine("<2> Type's: ");
+            Console.WriteLine($"<4> Restaurant's Name: {newRestaurant.Name}");
+            Console.WriteLine($"<3> Add Location: {newLocation.Contry} {newLocation.State} {newLocation.Zipcode}");
+            Console.WriteLine($"<2> Type's: {newRestaurant.Type}");
             Console.WriteLine("<1> Add Restaurant");
             Console.WriteLine("<0> Go Back");
             Console.WriteLine();
@@ -35,8 +36,10 @@ namespace RestaurantUI
                     return "MainMenu";
                 case "1":
                     try 
-                    { 
-                        _reposityory.AddRestaurant(newRestaurant);
+                    {
+                        newRestaurant.Locations.Clear();
+                        newRestaurant.Locations.Add(newLocation);
+                        _repository.AddRestaurant(newRestaurant);
                     }
                     catch (Exception ex)
                     {
@@ -46,14 +49,16 @@ namespace RestaurantUI
                     return "MainMenu";
                 case "2":
                     Console.Write("Enter type: ");
-                    newRestaurant.sType = Console.ReadLine();
+                    newRestaurant.Type = Console.ReadLine();
+                    Console.Clear();
                     return "Add Restaurant";
                 case "3":
                     Console.Clear();
                     return "Add Location";
                 case "4":
                     Console.Write("Enter Name: ");
-                    newRestaurant.sName = Console.ReadLine();
+                    newRestaurant.Name = Console.ReadLine();
+                    Console.Clear();
                     return "Add Restaurant";
                 default:
                     Console.Clear();

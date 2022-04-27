@@ -10,16 +10,13 @@ namespace RestaurantUI
 {
     internal class AddLocationForRestaurant : IMenu
     {
-        public static Location newLocation = new Location();
-        private IRestaurantLogic _reposityory = new RestaurantLogic();//up casting
-
         public void Display()
         {
             Console.WriteLine("Adding a New Restaurant\n");
 
-            Console.WriteLine("<3> Zipcode: ");
-            Console.WriteLine("<2> State: ");
-            Console.WriteLine("<1> Country");
+            Console.WriteLine($"<3> Zipcode: {AddRestaurant.newLocation.Zipcode}");
+            Console.WriteLine($"<2> State: {AddRestaurant.newLocation.State}");
+            Console.WriteLine($"<1> Country: {AddRestaurant.newLocation.Contry}");
             Console.WriteLine("<0> Go Back");
             Console.WriteLine();
         }
@@ -34,15 +31,18 @@ namespace RestaurantUI
                     return "Add Restaurant";
                 case "1":
                     Console.Write("Enter Country: ");
-                    newLocation.sContry = Console.ReadLine();
+                    AddRestaurant.newLocation.Contry = Console.ReadLine();
+                    Console.Clear();
                     return "Add Location";
                 case "2":
                     Console.Write("Enter State: ");
-                    newLocation.sState = Console.ReadLine();
+                    AddRestaurant.newLocation.State = Console.ReadLine();
+                    Console.Clear();
                     return "Add Location";
                 case "3":
                     Console.Write("Enter Zipcode: ");
-                    newLocation.sZipcode= Console.ReadLine();
+                    AddRestaurant.newLocation.Zipcode= Console.ReadLine();
+                    Console.Clear();
                     return "Add Location";
                 default:
                     Console.Clear();

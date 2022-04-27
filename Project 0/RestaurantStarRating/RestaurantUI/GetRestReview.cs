@@ -11,7 +11,7 @@ namespace RestaurantUI
             var vRestaurant = repository.GetAllRestaurants();
             foreach(var rest in vRestaurant)
             {
-                Console.WriteLine($"{rest.sName} {rest.sReview}");
+                Console.WriteLine($"{rest.Name} {rest.Review}");
             }
         }
 

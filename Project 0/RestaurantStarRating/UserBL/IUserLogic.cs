@@ -9,6 +9,7 @@ namespace UserBL
         void SearchUserName(string name);
         void SearchUserID(string id);
         void SearchUser();
+        bool SearchUser(string name);
     }
     interface IUserSearch
     {

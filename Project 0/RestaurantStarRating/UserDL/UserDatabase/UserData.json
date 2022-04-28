@@ -5,33 +5,5 @@
     "UserName": "Admin",
     "ID": "000000000",
     "Password": "Password"
-  },
-  {
-    "FirstName": "Cat",
-    "LastName": "Nine",
-    "UserName": "Catty",
-    "ID": "",
-    "Password": "Password"
-  },
-  {
-    "FirstName": "",
-    "LastName": "",
-    "UserName": "",
-    "ID": "",
-    "Password": ""
-  },
-  {
-    "FirstName": "K",
-    "LastName": "Nine",
-    "UserName": "K9",
-    "ID": "",
-    "Password": "Pass9"
-  },
-  {
-    "FirstName": "Cat",
-    "LastName": "Nip",
-    "UserName": "Till",
-    "ID": "",
-    "Password": "kk"
   }
 ]

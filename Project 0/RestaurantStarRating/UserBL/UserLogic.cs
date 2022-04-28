@@ -39,6 +39,18 @@ namespace UserBL
             }
         }
 
+        public bool SearchUser(string name)
+        {
+            var vUser = repo.GetAllUser();
+            var vFilteredUser = vUser.Where(x => x.UserName.Contains(name)).ToList();
+            foreach (var u in vFilteredUser)
+            {
+                if(u.UserName == name)
+                    { return true; }
+            }
+            return false;
+        }
+
         public void SearchUserID(string id)
         {
             var vUser = repo.GetAllUser();

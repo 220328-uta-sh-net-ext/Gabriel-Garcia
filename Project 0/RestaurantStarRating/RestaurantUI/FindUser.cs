@@ -8,10 +8,10 @@ internal class FindUser : IMenu
     public void Display()
     {
         Console.WriteLine("Finding a User ");
-        Console.WriteLine("<3>User ID:");
-        Console.WriteLine("<2>User Name:"); 
-        Console.WriteLine("<1>Display all User:");
-        Console.WriteLine("<0>Exit:");
+        Console.WriteLine("<3> User ID:");
+        Console.WriteLine("<2> User Name:"); 
+        Console.WriteLine("<1> Display all User:");
+        Console.WriteLine("<0> Exit:");
     }
 
     public string UserChoice()

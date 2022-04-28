@@ -15,13 +15,13 @@ namespace RestaurantUI
         public void Display()
         {
             Console.WriteLine("Login menu");
-            Console.WriteLine($"Press <3> User Name:{uName}");
+            Console.WriteLine($"<3> User Name:{uName}");
             if(uPass == "")
-                Console.WriteLine("Press <2> Password:");
+                Console.WriteLine("<2> Password:");
             else
-                Console.WriteLine("Press <2> Password: ***");
-            Console.WriteLine($"Press <1> Login");
-            Console.WriteLine("Press <0> Go Back");
+                Console.WriteLine("<2> Password: ***");
+            Console.WriteLine($"<1> Login");
+            Console.WriteLine("<0> Go Back");
         }
 
         public string UserChoice()

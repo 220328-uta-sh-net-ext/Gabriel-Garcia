@@ -11,9 +11,9 @@ namespace RestaurantUI
         public void Display()
         {
             Console.WriteLine("User Menu ");
-            Console.WriteLine("Add a Review:\t 2");
-            Console.WriteLine("See Resaurants:\t 1");
-            Console.WriteLine("Exit:\t\t 0");
+            Console.WriteLine("<2> Add a Review");
+            Console.WriteLine("<1> See Resaurants");
+            Console.WriteLine("<0> Exit");
         }
 
         public string UserChoice()

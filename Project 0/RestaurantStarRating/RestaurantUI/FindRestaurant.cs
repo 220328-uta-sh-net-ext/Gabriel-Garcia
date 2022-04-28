@@ -4,23 +4,23 @@ using RestaurantUI;
 internal class FindRestaurant : IMenu
 {
     IRestaurantLogic repo = new RestaurantLogic();
-    private static string sInputID = "";
+    public static string sInputID = "";
     private static string sInputType = "";
     private static string sInputContry = "";
     private static string sInputState = "";
     private static string sInputZip = "";
-    private static string sInputName = "";
+    public static string sInputName = "";
     public void Display()
     {
         Console.WriteLine("Finding and Rate a Restaurant ");
-        Console.WriteLine($"<8>Enter Type: {sInputType}");
-        Console.WriteLine($"<7>Enter Contry: {sInputContry}");
-        Console.WriteLine($"<6>Enter State: {sInputState}");
-        Console.WriteLine($"<5>Enter Zipcode: {sInputZip}");
+        Console.WriteLine($"<8> Enter Type: {sInputType}");
+        Console.WriteLine($"<7> Enter Contry: {sInputContry}");
+        Console.WriteLine($"<6> Enter State: {sInputState}");
+        Console.WriteLine($"<5> Enter Zipcode: {sInputZip}");
         Console.WriteLine($"<4>* Enter ID {sInputID}");
         Console.WriteLine($"<3>* Enter Name:: {sInputName}");
-        Console.WriteLine($"<2>Rate a Restaurant: Compleat all '*' ");
-        Console.WriteLine("<1>Display all Restaurant:");
+        Console.WriteLine($"<2> Rate a Restaurant: Compleat all '*' ");
+        Console.WriteLine("<1> Display all Restaurant:");
         Console.WriteLine("<0>Exit:");
     }
 

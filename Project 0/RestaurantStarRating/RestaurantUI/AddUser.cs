@@ -20,9 +20,9 @@ namespace RestaurantUI
             Console.WriteLine("<4> Last Name: " + newUser.LastName);
             Console.WriteLine("<3> User Name: " + newUser.UserName);
             if (newUser.Password == "")
-                Console.WriteLine("Press <2> Password:");
+                Console.WriteLine("<2> Password:");
             else
-                Console.WriteLine("Press <2> Password: ***");
+                Console.WriteLine("<2> Password: ***");
             Console.WriteLine("<1> Create Account");
             Console.WriteLine("<0> Go Back");
         }
@@ -30,6 +30,8 @@ namespace RestaurantUI
         public string UserChoice()
         {
             string sUserInput = Console.ReadLine();
+            DateTime localDate = DateTime.Now;
+            string sID = localDate.Year.ToString() + localDate.Day+ localDate.Hour + localDate.Minute;
             switch (sUserInput)
             {
                 case "0":
@@ -38,7 +40,20 @@ namespace RestaurantUI
                 case "1":
                     try 
                     {
-                        _repo.AddUser(newUser);
+                        if (!_repo.SearchUser(newUser.UserName))
+                        {
+                            string n = newUser.UserName;
+                            n.ToArray();
+                            sID = localDate.Year.ToString() +n.Last() + localDate.Day + n.First() +localDate.Hour + localDate.Minute;
+                            newUser.ID = sID;
+                            _repo.AddUser(newUser);
+                        }
+                           
+                        else
+                        {
+                            Console.WriteLine($"User name '{newUser.UserName}' is in use!");
+                            return "Create User";
+                        }
                     }
                     catch(Exception ex)
                     {

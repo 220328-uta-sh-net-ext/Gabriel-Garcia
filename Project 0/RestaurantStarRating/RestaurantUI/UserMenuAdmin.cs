@@ -10,10 +10,11 @@ namespace RestaurantUI
     {
         public void Display()
         {
-            Console.WriteLine("User Menu ");
-            Console.WriteLine("Add a Review:\t 2");
-            Console.WriteLine("See Resaurants:\t 1");
-            Console.WriteLine("Exit:\t\t 0");
+            Console.WriteLine("Admin Menu ");
+            Console.WriteLine("<3>Add a Restaurant: ");
+            Console.WriteLine("<2>Find a Restaurant: ");
+            Console.WriteLine("<1>Find a User: ");
+            Console.WriteLine("<0>Exit: ");
         }
 
         public string UserChoice()
@@ -23,12 +24,14 @@ namespace RestaurantUI
             switch (userInput)
             {
                 case "0":
-                    return "User Menu";
+                    return "MainMenu";
                 case "1":
-                    return "User Menu";
+                    return "FindUser";
                 case "2":
-                    return "User Menu";
+                    return "FindRestaurant";
                 case "3":
+                    return "Add Restaurant";
+                case "4":
                     return "User Menu";
                 default:
                     Console.WriteLine("Please enter a valid response");

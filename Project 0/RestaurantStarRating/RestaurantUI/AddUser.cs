@@ -19,7 +19,10 @@ namespace RestaurantUI
             Console.WriteLine("<5> First Name: " + newUser.FirstName);
             Console.WriteLine("<4> Last Name: " + newUser.LastName);
             Console.WriteLine("<3> User Name: " + newUser.UserName);
-            Console.WriteLine("<2> Password: ");
+            if (newUser.Password == "")
+                Console.WriteLine("Press <2> Password:");
+            else
+                Console.WriteLine("Press <2> Password: ***");
             Console.WriteLine("<1> Create Account");
             Console.WriteLine("<0> Go Back");
         }

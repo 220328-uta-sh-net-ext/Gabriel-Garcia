@@ -6,7 +6,9 @@ namespace UserBL
     {
         User AddUser(User u);
         string SearchUser(string name,string pass);
-        List<User> SearchUser(string name);
+        void SearchUserName(string name);
+        void SearchUserID(string id);
+        void SearchUser();
     }
     interface IUserSearch
     {

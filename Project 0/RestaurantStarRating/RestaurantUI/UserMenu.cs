@@ -23,7 +23,7 @@ namespace RestaurantUI
             switch (userInput)
             {
                 case "0":
-                    return "User Menu";
+                    return "MainMenu";
                 case "1":
                     return "User Menu";
                 case "2":

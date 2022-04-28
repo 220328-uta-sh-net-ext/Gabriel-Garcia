@@ -21,21 +21,42 @@ namespace UserBL
             var vFilteredUser = vUser.Where(x => x.UserName.Contains(name)).ToList();
            foreach(var v in vFilteredUser)
             {
-                if (v.Password.Contains(pass) && v.ID.Contains("000000000"))
+                if (v.Password == pass && v.ID.Contains("000000000"))
                 { result = "Admin"; break; }
-                if (v.Password.Contains(pass) && !v.ID.Contains("000000000"))
+                if (v.Password == pass && !v.ID.Contains("000000000"))
                 { result = "User"; break; }
                 else
                     { result = "NoUser";}
             }
            return result;
         }
+        public void SearchUser()
+        {
+            var vUser = repo.GetAllUser();
+            foreach (var u in vUser)
+            {
+                Console.WriteLine($"User: {u.UserName}\n\tFrist Name: {u.FirstName}\n\tLast Name: {u.LastName}\n\tID: {u.ID}\n");
+            }
+        }
 
-        public List<User> SearchUser(string name)
+        public void SearchUserID(string id)
+        {
+            var vUser = repo.GetAllUser();
+            var vFilteredUser = vUser.Where(x => x.ID.Contains(id)).ToList();
+            foreach (var u in vFilteredUser)
+            {
+                Console.WriteLine($"{u.FirstName} {u.LastName} {u.UserName} {u.ID}");
+            }
+        }
+
+        public void SearchUserName(string name)
         {
             var vUser = repo.GetAllUser();
             var vFilteredUser = vUser.Where(x => x.UserName.Contains(name)).ToList();
-            return vFilteredUser;
+            foreach(var u in vFilteredUser)
+            {
+                Console.WriteLine($"{u.FirstName} {u.LastName} {u.UserName} {u.ID}");
+            }
         }
     }
 }

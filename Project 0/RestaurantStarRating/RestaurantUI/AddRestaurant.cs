@@ -33,20 +33,23 @@ namespace RestaurantUI
             {
                 case "0":
                     Console.Clear();
-                    return "MainMenu";
+                    return "Admin Menu";
                 case "1":
                     try 
                     {
-                        newRestaurant.Locations.Clear();
-                        newRestaurant.Locations.Add(newLocation);
-                        _repository.AddRestaurant(newRestaurant);
+                        if (!(newLocation.Contry != "" || newLocation.State != "" || newLocation.Zipcode != ""))
+                        {
+                            newRestaurant.Locations.Clear();
+                            newRestaurant.Locations.Add(newLocation);
+                            _repository.AddRestaurant(newRestaurant);
+                        }
                     }
                     catch (Exception ex)
                     {
                         Console.WriteLine(ex.Message);
                     }
                     Console.Clear();
-                    return "MainMenu";
+                    return "Admin Menu";
                 case "2":
                     Console.Write("Enter type: ");
                     newRestaurant.Type = Console.ReadLine();

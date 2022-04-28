@@ -41,22 +41,27 @@ namespace RestaurantUI
                     {
                         Console.WriteLine(ex.Message);
                     }
+                    Console.Clear();
                     return "MainMenu";
                 case "2":
                     Console.Write("Enter a Password: ");
                     newUser.Password = Console.ReadLine();
+                    Console.Clear();
                     return "Create User";
                 case "3":
                     Console.Write("Enter a Loggin Name: ");
                     newUser.UserName = Console.ReadLine();
+                    Console.Clear();
                     return "Create User";
                 case "4":
                     Console.Write("Enter Last Name: ");
                     newUser.LastName = Console.ReadLine();
+                    Console.Clear();
                     return "Create User";
                 case "5":
                     Console.Write("Enter First Name: ");
                     newUser.FirstName = Console.ReadLine();
+                    Console.Clear();
                     return "Create User";
                 default:
                     Console.Clear();

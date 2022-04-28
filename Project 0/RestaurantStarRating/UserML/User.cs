@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-namespace UserML
+﻿namespace UserML
 {
     public class User
     {
@@ -24,7 +19,7 @@ namespace UserML
         }
         public override string ToString()
         {
-            return $"First Name:{FirstName}\nLast Name:{LastName}\nUser Name:{UserName}\nUser ID:{ID}\nPassword:{Password}";
+            return $"First Name: {FirstName}\nLast Name: {LastName}\nUser Name: {UserName}\nUser ID: {ID}\nPassword: {Password}";
         }
     }
 }

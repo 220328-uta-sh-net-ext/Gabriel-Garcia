@@ -5,7 +5,8 @@ namespace UserBL
     public interface IUserLogic
     {
         User AddUser(User u);
-        List<User> SearchUser(string name,string pass);
+        string SearchUser(string name,string pass);
+        List<User> SearchUser(string name);
     }
     interface IUserSearch
     {

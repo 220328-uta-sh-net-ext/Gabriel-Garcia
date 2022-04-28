@@ -10,7 +10,7 @@ namespace UserDL
     {
         private string sFilePath = "../../../../UserDL/UserDatabase/";
         private string sJsonString;
-        public User AddUser(User uUser)
+        public User AddUser(User uUser)// Serialization
         {
             var vUser = GetAllUser();
             vUser.Add(uUser);
@@ -34,7 +34,7 @@ namespace UserDL
             return uUser;
         }
 
-        public List<User> GetAllUser()
+        public List<User> GetAllUser()// Deserialization
         {
             try
             {

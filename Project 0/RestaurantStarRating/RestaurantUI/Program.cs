@@ -2,18 +2,10 @@
 IMenu menu = new MainMenu();
 bool bLoop = true;
 
-//bool logingIn = true;
-//bool isAdmin = false;
 while(bLoop)
 {
     menu.Display();
     string sGetInput = menu.UserChoice();
-    /*if (!logingIn && isAdmin)
-        sGetInput = menu.AdminUserLoggin();
-    else if(!logingIn && !isAdmin)
-        sGetInput = menu.UserChoiceLogedin();
-    else
-        sGetInput = menu.UserChoiceLogingin();*/
 
 
     switch (sGetInput)
@@ -21,12 +13,34 @@ while(bLoop)
         case "Exit":
             bLoop = false;
             break;
+        //--------------------MainManus----------------
         case "MainMenu":
             menu = new MainMenu();
             break;
         case "Login User":
             menu = new LogInUser();
             break;
+        //--------------------UserManus----------------
+        case "User Menu":
+            menu = new UserMenu();
+            break;
+        case "Admin Menu":
+            menu = new UserMenuAdmin();
+            break;
+        //--------------------ActionMenus----------------
+        case "AddReview":
+            menu = new AddReview();
+            break;
+        case "FindRestaurant":
+            menu = new FindRestaurant();
+            break;
+        case "FindUser":
+            menu = new FindUser();
+            break;
+        case "DisplayRestaurant":
+            menu = new DisplayRestaurant();
+            break;
+        //--------------------AddItems----------------
         case "Create User":
             menu = new AddUser();
             break;

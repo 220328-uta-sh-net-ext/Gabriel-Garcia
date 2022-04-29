@@ -26,14 +26,15 @@ internal class AddReview : IMenu
             case "0":
                 return "Admin Menu";
             case "1":
-                Console.WriteLine($"<0> <1> <2> <3> <4> <5>: ");
+                Console.WriteLine($"<1> <2> <3> <4> <5>: ");
                 Console.Write($"\nRate the Restaurant: ");
                 try
                 {
                     sRate = Convert.ToInt32(Console.ReadLine());
-                    if (sRate >= 0 && sRate <= 5)
+                    if (sRate > 0 && sRate <= 5)
                     {
                         //do this
+                        repo.RateRestaurant(name, id);
                         Console.WriteLine("A valid input: " + sRate);
                     }
                     else

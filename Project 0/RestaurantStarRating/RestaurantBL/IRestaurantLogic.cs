@@ -15,6 +15,7 @@ namespace RestaurantBL
         void SearchRestaurant();
         void SearchRestaurant(string sType, string sContry, string sState, string sZip, string name, string id);
         void PrintRateRestaurant(string n, string i);
+        void RateRestaurant(string n, string i);
 
     }
     interface IRestaurantSearch

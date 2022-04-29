@@ -29,7 +29,6 @@ namespace RestaurantDL
             }
             return rest;
         }
-
         public List<Restaurant> GetAllRestaurants()//desrialization
         {
             try 
@@ -44,6 +43,27 @@ namespace RestaurantDL
             {
                 Console.WriteLine("Please check the file name" + ex.Message);
             }
+            if (!string.IsNullOrEmpty(sJsonString))
+                return JsonSerializer.Deserialize<List<Restaurant>>(sJsonString);
+            else
+                return null;
+        }
+        public List<Restaurant> SetReview()//desrialization
+        {
+            try
+            {
+                sJsonString = File.ReadAllText(sFilePath + "Restaurant.json");
+            }
+            catch (DirectoryNotFoundException ex)
+            {
+                Console.WriteLine("Please check the path, " + ex.Message);
+            }
+            catch (FileNotFoundException ex)
+            {
+                Console.WriteLine("Please check the file name" + ex.Message);
+            }
+            var vRest = JsonSerializer.Deserialize<List<Restaurant>>(sJsonString);
+            
             if (!string.IsNullOrEmpty(sJsonString))
                 return JsonSerializer.Deserialize<List<Restaurant>>(sJsonString);
             else

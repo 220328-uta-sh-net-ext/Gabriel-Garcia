@@ -59,7 +59,6 @@ namespace RestaurantBL
                         Console.Write($" {r2.Contry}, {r2.State}, {r2.Zipcode}\n");
                     }
                 }
-                //Console.WriteLine("\n+--------------------+");
             }
         }
         public void PrintRateRestaurant(string n, string i)
@@ -67,7 +66,6 @@ namespace RestaurantBL
             var vRest = repo.GetAllRestaurants();
             foreach (var r in vRest)
             {
-                //Console.Write($"\nRestaurant: {r.Name}\n\tID:{r.ID}\n\tRating:{r.Review} Stars, {r.NumberOfReview} Reviews\n\tType:{r.Type}\n\tLocation:");
                 foreach (var r2 in r.Locations)
                 {
                     if (r.Name == n && r.ID == i)
@@ -79,5 +77,6 @@ namespace RestaurantBL
             }
             Console.WriteLine("\n+--------------------+");
         }
+
     }
 }

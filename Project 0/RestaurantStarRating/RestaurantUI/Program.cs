@@ -37,9 +37,6 @@ while(bLoop)
         case "FindUser":
             menu = new FindUser();
             break;
-        case "DisplayRestaurant":
-            menu = new DisplayRestaurant();
-            break;
         //--------------------AddItems----------------
         case "Create User":
             menu = new AddUser();

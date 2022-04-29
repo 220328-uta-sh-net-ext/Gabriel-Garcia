@@ -11,8 +11,11 @@ namespace RestaurantBL
     {
         Restaurant AddRestaurant(Restaurant r);
         List<Restaurant> SearchRestaurant(string name,string id);
+        //void PrintTheRestaurantToRate(string name, string id);
         void SearchRestaurant();
-        void SearchRestaurant(string sType, string sContry, string sState, string sZip, string name, string id);    
+        void SearchRestaurant(string sType, string sContry, string sState, string sZip, string name, string id);
+        void PrintRateRestaurant(string n, string i);
+
     }
     interface IRestaurantSearch
     {

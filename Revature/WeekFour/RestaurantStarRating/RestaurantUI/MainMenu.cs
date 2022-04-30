@@ -10,7 +10,7 @@ namespace RestaurantUI
     {
         public void Display()
         {
-            Console.WriteLine("Welcome to Restaurant Review");
+            Console.WriteLine("--Welcome to Restaurant Review");
             Console.WriteLine("<2> Create User");
             Console.WriteLine("<1> Login User");
             Console.WriteLine("<0> Exit");

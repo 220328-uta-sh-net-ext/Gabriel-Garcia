@@ -78,5 +78,9 @@ namespace RestaurantBL
             Console.WriteLine("\n+--------------------+");
         }
 
+        public void RateRestaurant(string n, string i)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

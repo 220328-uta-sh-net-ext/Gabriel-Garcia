@@ -29,6 +29,12 @@ namespace RestaurantDL
             }
             return rest;
         }
+
+        public Restaurant AddReview(Restaurant rest)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Restaurant> GetAllRestaurants()//desrialization
         {
             try 

@@ -1,13 +1,20 @@
 ﻿using MainUI;
+using MainDL;
+using MainBL;
 
 IMenu menu = new StartMenu();
+string connectinStrringFilePath = "../../../../SQLConnection.txt";
+string connectinStrring = File.ReadAllText(connectinStrringFilePath);
+IRepositoryU repoU = new RepositoryU(connectinStrring);
+IUserLogic Ulogic = new UserLogic(repoU);
+IRepositoryR repoR = new RepositoryR(connectinStrring);
+IRestaurantLogic Rlogic = new RestaurantLogic(repoR);
+//IMainLogic Ulogic = new UserLogic(RepositoryU);
 bool bLoop = true;
 while (bLoop)
 {
     menu.Display();
-    Console.Write("   > ");
-    string sInput = Console.ReadLine();
-    Console.Write("\n");
+    string sInput = menu.UserChoice();
 
 
     switch (sInput)
@@ -20,10 +27,10 @@ while (bLoop)
             menu = new StartMenu();
             break;
         case "LoginUser":
-            menu = new LoginUser();
+            menu = new LoginUser(Ulogic);
             break;
         case "AddUser":
-            menu = new AddUser();
+            menu = new AddUser(Ulogic);
             break;
         //--------------------UserManus----------------
         case "UserMenu":
@@ -34,17 +41,17 @@ while (bLoop)
             break;
         //--------------------AdminMenus-----------------
         case "FindUser":
-            menu = new FindUser();
+            menu = new FindUser(Ulogic);
             break;
         case "AddRestaurant":
-            menu = new AddRestaurant();
+            menu = new AddRestaurant(Rlogic);
             break;
         //--------------------ActionMenus----------------
         case "AddReview":
             //menu = new AddReview();
             break;
-        case "FindRestaurant":
-            //menu = new FindRestaurant();
+        case "FindRateRestaurant":
+            menu = new FindAndRateRestaurant(Rlogic);
             break;
         default:
             Console.WriteLine("invalide input...");

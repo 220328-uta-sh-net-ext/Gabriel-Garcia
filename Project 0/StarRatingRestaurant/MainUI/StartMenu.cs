@@ -1,7 +1,7 @@
 ﻿using MainUI;
-
 internal class StartMenu : IMenu
 {
+
     public void Display()
     {
         Console.WriteLine("-- Welcome to Restaurant Review --\n");

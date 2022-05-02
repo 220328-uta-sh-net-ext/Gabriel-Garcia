@@ -2,6 +2,7 @@
 
 internal class AdminMenu : IMenu
 {
+    private static string name;
     public void Display()
     {
         Console.WriteLine("----------- Admin Menu -----------\n");
@@ -9,7 +10,7 @@ internal class AdminMenu : IMenu
         Console.WriteLine("   <2> Add a Restaurant");
         Console.WriteLine("   <1> Find a User");
         Console.WriteLine("   <0> Logout");
-        Console.WriteLine($"ID: Admin User".PadLeft(34));
+        Console.WriteLine($"User: {name}".PadLeft(34));
         Console.WriteLine("----------------------------------\n");
     }
 
@@ -29,14 +30,20 @@ internal class AdminMenu : IMenu
                 return "FindUser";
             case "2":
                 Console.Clear();
-                return "FindRateRestaurant";
+                return "AddRestaurant";
             case "3":
                 Console.Clear();
-                return "AddRestaurant";
+                FindAndRateRestaurant.setLog(name);
+                return "FindRateRestaurant";
             default:
                 Console.Clear();
                 Console.WriteLine($"Your input '{sInput}' is invalid!");
                 return "Login User";
         }
     }
+    public static void setLog(string n)
+    {
+        name = n;
+    }
+
 }

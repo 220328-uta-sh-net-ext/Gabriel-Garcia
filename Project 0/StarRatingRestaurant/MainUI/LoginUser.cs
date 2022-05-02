@@ -1,10 +1,13 @@
 ﻿using MainUI;
+using MainBL;
 
 internal class LoginUser : IMenu
 {
     private static string name = "";
     private static string pass = "";
-    //IUserLogic repo = new UserLogic();
+    readonly IUserLogic logic;
+    public LoginUser(IUserLogic logic)
+    { this.logic = logic; }
     public void Display()
     {
         Console.WriteLine("----------- Login Menu -----------\n");
@@ -30,15 +33,28 @@ internal class LoginUser : IMenu
                 name = "";
                 return "StartMenu";
             case "1":
-                //var result = repo.SearchUser(uName, uPass);
-                Console.Clear();
-                //if (result == "Admin")
-                //    return "Admin Menu";
-                //else if (result == "User")
-                //    return "User Menu";
-                //else
-                //    Console.WriteLine("UserName or Password Invalid!");
-                return "LoginUser";
+                var result = logic.LogUser(name, pass);
+                if (result == "UserMenu")
+                {
+                    pass = "";
+                    UserMenu.setLog(name);
+                    name = "";
+                    Console.Clear(); return "UserMenu"; 
+                }
+                else if (result == "AdminMenu")
+                {
+                    pass = "";
+                    AdminMenu.setLog(name);
+                    name = "";
+                    Console.Clear(); return "AdminMenu"; 
+                }
+                else
+                {
+                    Console.WriteLine("User Name or Password Incorrect!");
+                    Console.ReadLine();
+                    Console.Clear();
+                    return "LoginUser";
+                }
             case "2":
                 Console.Write("Enter Password: ");
                 pass = Console.ReadLine();

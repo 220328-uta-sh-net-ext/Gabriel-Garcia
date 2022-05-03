@@ -24,7 +24,7 @@ internal class FindUser : IMenu
             throw new InvalidDataException("");
 
         Console.Write("\n");
-
+        Log.Information("Admin searched for users");
         switch (sInput)
         {
             case "0":

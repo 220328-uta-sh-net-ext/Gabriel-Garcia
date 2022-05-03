@@ -50,6 +50,7 @@
                 }
             }
             return $"\nRestaurant: {Name}\tID:{ID}\n\nReview({NReview}): {Review} Stars\tType:{TypeOf}\n\tLocation: {Country} {State} {Zipcode}\n";
+        
         }
     }
 }

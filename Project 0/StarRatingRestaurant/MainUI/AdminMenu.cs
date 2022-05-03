@@ -24,6 +24,7 @@ internal class AdminMenu : IMenu
         {
             case "0":
                 Console.Clear();
+                Log.Information($"User {name} loged out.");
                 return "StartMenu";
             case "1":
                 Console.Clear();

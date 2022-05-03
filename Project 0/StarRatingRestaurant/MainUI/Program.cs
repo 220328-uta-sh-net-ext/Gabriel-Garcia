@@ -12,7 +12,7 @@ IUserLogic Ulogic = new UserLogic(repoU);
 IRepositoryR repoR = new RepositoryR(connectinStrring);
 IRestaurantLogic Rlogic = new RestaurantLogic(repoR);
 
-//Log.Logger = new LoggerConfiguration().WritTo.File("./Logs/user.text").CreateLogger();
+Log.Logger = new LoggerConfiguration().WriteTo.File("./Logs/user.text").CreateLogger();
 
 //IMainLogic Ulogic = new UserLogic(RepositoryU);
 bool bLoop = true;

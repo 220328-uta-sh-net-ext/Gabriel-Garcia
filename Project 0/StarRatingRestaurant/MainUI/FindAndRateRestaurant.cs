@@ -98,10 +98,11 @@ internal class FindAndRateRestaurant : IMenu
                         if (rate > 0 && rate <= 5)
                         {
                             logic.RateRestaurant(sid, rate);
-                            sid = "";
+                            sid = ""; 
+                            Log.Information($"User '{sName}' added a rateing {rate}");
                             Console.WriteLine("Your Review was Posted.");
                             return "FindRateRestaurant";
-                        }
+                         }
                         else { Console.WriteLine("Invalid input."); return "FindRateRestaurant"; }
                     }
                     catch (Exception ex) { Console.WriteLine(ex.Message); }
@@ -149,7 +150,7 @@ internal class FindAndRateRestaurant : IMenu
             throw new InvalidDataException("?");
         if (yesORno == "y" || yesORno == "Y" || yesORno == "Yes" || yesORno == "yes" || yesORno == "YES")
             sId = i;
-        else sId = i;
+        else sId = "";
 
     }
 }

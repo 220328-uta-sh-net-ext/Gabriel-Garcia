@@ -24,6 +24,7 @@ internal class LoginUser : IMenu
         Console.Write("   > ");
         string sInput = Console.ReadLine();
         Console.Write("\n");
+        DateTime localDate = DateTime.Now;
 
         switch (sInput)
         {
@@ -38,13 +39,15 @@ internal class LoginUser : IMenu
                 {
                     pass = "";
                     UserMenu.setLog(name);
+                    Log.Information($"User '{name}' loged in.");
                     name = "";
                     Console.Clear(); return "UserMenu"; 
                 }
                 else if (result == "AdminMenu")
                 {
                     pass = "";
-                    AdminMenu.setLog(name);
+                    AdminMenu.setLog(name); 
+                    Log.Information($" User '{name}' loged in.");
                     name = "";
                     Console.Clear(); return "AdminMenu"; 
                 }

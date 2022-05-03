@@ -5,11 +5,13 @@ VisualStudioVersion = 17.1.32414.318
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MainUI", "MainUI\MainUI.csproj", "{F404F380-87F4-4CEB-B411-8A126D4684E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MainDL", "MainDL\MainDL.csproj", "{1565A115-E6AD-4C7C-BA94-6258FB2EA3B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MainDL", "MainDL\MainDL.csproj", "{1565A115-E6AD-4C7C-BA94-6258FB2EA3B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MainML", "MainML\MainML.csproj", "{29671191-E673-4C6E-8F9C-A4BCBE41B864}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MainML", "MainML\MainML.csproj", "{29671191-E673-4C6E-8F9C-A4BCBE41B864}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MainBL", "MainBL\MainBL.csproj", "{B8ED25CF-CA95-447D-8905-C7E1F9C8D09F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MainBL", "MainBL\MainBL.csproj", "{B8ED25CF-CA95-447D-8905-C7E1F9C8D09F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject0", "TestProject0\TestProject0.csproj", "{E6F359C7-019F-42D8-A9C0-111034686DAC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{B8ED25CF-CA95-447D-8905-C7E1F9C8D09F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8ED25CF-CA95-447D-8905-C7E1F9C8D09F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B8ED25CF-CA95-447D-8905-C7E1F9C8D09F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6F359C7-019F-42D8-A9C0-111034686DAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6F359C7-019F-42D8-A9C0-111034686DAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6F359C7-019F-42D8-A9C0-111034686DAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6F359C7-019F-42D8-A9C0-111034686DAC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

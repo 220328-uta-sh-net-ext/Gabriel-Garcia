@@ -51,12 +51,12 @@ namespace MainDL
             using SqlCommand command = new(selectCommandString, connection);
             connection.Open();
             using SqlDataReader reader = command.ExecuteReader();
-            int temp;
-            var vRestaruant = new List<Restaurant>();
+
+            var vRestaurant = new List<Restaurant>();
 
             while (reader.Read())
             {
-                vRestaruant.Add(new Restaurant
+                vRestaurant.Add(new Restaurant
                 {
                     Name = reader.GetString(0),
                     ID = reader.GetString(1),
@@ -71,7 +71,7 @@ namespace MainDL
                 });
             }
 
-            return vRestaruant;
+            return vRestaurant;
         }
     }
     public class RepositoryU : IRepositoryU

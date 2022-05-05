@@ -1,11 +1,11 @@
 ﻿using Models;
 
-namespace BLogic
+namespace BL
 {
     public interface IRestaurantLogic
     {
         Restaurant AddRestaurant(Restaurant r);
-        List<Restaurant> SearchRestaurant(string table,string type, string value);
+        List<Restaurant> SearchRestaurant(string table, string type, string value);
         void DeleteRestaurant(string id);
     }
     public interface IUserLogic

@@ -1,66 +1,62 @@
 ﻿global using Serilog;
-using BL;
-using DL;
-using UI;
 
-IMenus menu = new StartMenu();
+using MainUI;
+using MainDL;
+using MainBL;
+
+IMenu menu = new StartMenu();
 string connectinStrringFilePath = "../../../../SQLConnection.txt";
 string connectinStrring = File.ReadAllText(connectinStrringFilePath);
-
-//IRepositoryU repoU = new RepositoryU(connectinStrring);
-//IUserLogic Ulogic = new UserLogic(repoU);
-IRepositoryR repoR = new RepoRestaurants(connectinStrring);
+IRepositoryU repoU = new RepositoryU(connectinStrring);
+IUserLogic Ulogic = new UserLogic(repoU);
+IRepositoryR repoR = new RepositoryR(connectinStrring);
 IRestaurantLogic Rlogic = new RestaurantLogic(repoR);
 
-//Log.Logger = new LoggerConfiguration().WriteTo.File("./Logs/user.text").CreateLogger();
+Log.Logger = new LoggerConfiguration().WriteTo.File("./Logs/user.text").CreateLogger();
 
 //IMainLogic Ulogic = new UserLogic(RepositoryU);
-bool loop = true;
-
-while (loop)
+bool bLoop = true;
+while (bLoop)
 {
-    menu.DisplayOptions();
-    string sInput = menu.GetSendOptions();
+    menu.Display();
+    string sInput = menu.UserChoice();
 
 
     switch (sInput)
     {
         case "Exit":
-            loop = false;
+            bLoop = false;
             break;
         //--------------------StartManus----------------
         case "StartMenu":
             menu = new StartMenu();
             break;
         case "LoginUser":
-            menu = new LoginUser();
+            menu = new LoginUser(Ulogic);
             break;
         case "AddUser":
-            //menu = new AddUser(Ulogic);
-            break;
-        case "FindRestaurant":
-            menu = new FindRestaurant(Rlogic);
+            menu = new AddUser(Ulogic);
             break;
         //--------------------UserManus----------------
         case "UserMenu":
-            //menu = new UserMenu();
+            menu = new UserMenu();
             break;
         case "AdminMenu":
-            //menu = new AdminMenu();
+            menu = new AdminMenu();
             break;
         //--------------------AdminMenus-----------------
         case "FindUser":
-            //menu = new FindUser(Ulogic);
+            menu = new FindUser(Ulogic);
             break;
         case "AddRestaurant":
-            //menu = new AddRestaurant(Rlogic);
+            menu = new AddRestaurant(Rlogic);
             break;
         //--------------------ActionMenus----------------
         case "AddReview":
             //menu = new AddReview();
             break;
         case "FindRateRestaurant":
-            //menu = new FindAndRateRestaurant(Rlogic);
+            menu = new FindAndRateRestaurant(Rlogic);
             break;
         default:
             Console.WriteLine("invalide input...");

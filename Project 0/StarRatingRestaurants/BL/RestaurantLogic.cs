@@ -1,12 +1,12 @@
-﻿using Models;
-using DatabaseL;
+﻿using DL;
+using Models;
 
-namespace BLogic
+namespace BL
 {
-    public class RestaurantBL : IRestaurantLogic
+    public class RestaurantLogic : IRestaurantLogic
     {
         readonly IRepositoryR repo;
-        public RestaurantBL(IRepositoryR repo)
+        public RestaurantLogic(IRepositoryR repo)
         {
             this.repo = repo;
         }
@@ -20,9 +20,8 @@ namespace BLogic
         }
         public List<Restaurant> SearchRestaurant(string table, string type, string value)
         {
-            List<Restaurant>? restaurants = repo.DisplayRestaurants(table,type,value);
+            List<Restaurant>? restaurants = repo.DisplayRestaurants(table, type, value);
             return restaurants;
         }
-
     }
 }

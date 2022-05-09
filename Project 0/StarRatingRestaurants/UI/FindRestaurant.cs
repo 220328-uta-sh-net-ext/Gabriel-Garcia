@@ -39,27 +39,37 @@ internal class FindRestaurant : IMenus
                 Console.Clear();
                 return "StartMenu";
             case "1":
-                Action("Id", "Id setter");
-                //Console.Clear();
+                DisplayAll();
                 return "FindRateRestaurant";
             case "2":
-                Console.Clear();
+                if (Console.ReadLine() is not string id)
+                    throw new InvalidDataException("");
+                Display("Name", id);
                 return "FindRateRestaurant";
             case "3":
-                //Console.Clear();
+                if (Console.ReadLine() is not string zip)
+                    throw new InvalidDataException("");
+                Display("Name", zip);
                 return "FindRateRestaurant";
             case "4":
-                Console.Clear();
+                if (Console.ReadLine() is not string city)
+                    throw new InvalidDataException("");
+                Display("Name", city);
                 return "FindRateRestaurant";
             case "5":
-                Console.Clear();
+                if (Console.ReadLine() is not string state)
+                    throw new InvalidDataException("");
+                Display("Name", state);
                 return "FindRateRestaurant";
             case "6":
-                Console.Clear();
+                if (Console.ReadLine() is not string country)
+                    throw new InvalidDataException("");
+                Display("Country", country);
                 return "FindRateRestaurant";
             case "7":
-                Console.Clear();
-                Action("Name", "New Rest Test");
+                if (Console.ReadLine() is not string name)
+                    throw new InvalidDataException("");
+                Display("Name", name);
                 return "FindRateRestaurant";
             default:
                 Console.Clear();
@@ -67,7 +77,7 @@ internal class FindRestaurant : IMenus
                 return "FindRateRestaurant";
         }
     }
-    private void Action(string whereIt, string equalsTo)
+    private void Display(string whereIt, string equalsTo)
     {
         List<Restaurant>? restaurant = logic.SearchRestaurant(whereIt, equalsTo);
         List<Restaurant>? restLocation;
@@ -85,6 +95,34 @@ internal class FindRestaurant : IMenus
                     foreach (Reviews re in review)
                     {
                         Console.WriteLine($"Rating: {re.Rate} {re.Review}");
+                    }
+                }
+            }
+        }
+        else
+            Console.WriteLine("Restaurant Not Found");
+
+    }
+    private void DisplayAll()
+    {
+        List<Restaurant>? restaurant = logic.DisplayAllRestaurants();
+        List<Restaurant>? restLocation;
+        List<Reviews>? review;
+        Console.WriteLine("\nRestaurant\n");
+        if (restaurant.Count > 0)
+        {
+            foreach (Restaurant r in restaurant)
+            {
+                restLocation = logic.SearchRestLocation("Id", r.Id);
+                review = logicRev.DisplayReview("Id", r.Id);
+                foreach (Restaurant l in restLocation)
+                {
+                    Console.WriteLine($"Name: {r.Name}\tID: {r.Id}\n   Location: {l.Country} {l.State} {l.City} {l.Zipcode}");
+                    foreach (Reviews re in review)
+                    {   if (re.Review == "")
+                            Console.WriteLine("Not Yet Reated\n");
+                        else
+                            Console.WriteLine($"Rating: {re.Rate} {re.Review}\n");
                     }
                 }
             }

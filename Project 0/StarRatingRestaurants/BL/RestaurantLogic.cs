@@ -37,5 +37,10 @@ namespace BL
             List<Restaurant>? restaurants = repo.SearchRestaurants(whereIt, equalsTo);
             return restaurants;
         }
+        public List<Restaurant> DisplayAllRestaurants()
+        {
+            List<Restaurant>? restaurants = repo.DisplayAllRestLocation();
+            return restaurants;
+        }
     }
 }

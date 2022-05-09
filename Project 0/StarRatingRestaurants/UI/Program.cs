@@ -7,10 +7,11 @@ IMenus menu = new StartMenu();
 string connectinStrringFilePath = "../../../../SQLConnection.txt";
 string connectinStrring = File.ReadAllText(connectinStrringFilePath);
 
-//IRepositoryU repoU = new RepositoryU(connectinStrring);
-//IUserLogic Ulogic = new UserLogic(repoU);
-IRepositoryR repoR = new RepoRestaurants(connectinStrring);
 IRepositoryRev repoRev = new RepoReview(connectinStrring);
+
+IRepositoryU repoU = new RepoUsers(connectinStrring);
+IUserLogic Ulogic = new UserLogic(repoU,repoRev);
+IRepositoryR repoR = new RepoRestaurants(connectinStrring);
 IRestaurantLogic Rlogic = new RestaurantLogic(repoR, repoRev);
 IReviewLogic logicR = new RestaurantLogic(repoR, repoRev);
 
@@ -35,10 +36,10 @@ while (loop)
             menu = new StartMenu();
             break;
         case "LoginUser":
-            menu = new LoginUser();
+            menu = new LoginUser(Ulogic);
             break;
-        case "AddUser":
-            //menu = new AddUser(Ulogic);
+        case "CreateUser":
+            menu = new CreateUser(Ulogic);
             break;
         case "FindRestaurant":
             menu = new FindRestaurant(Rlogic, logicR);

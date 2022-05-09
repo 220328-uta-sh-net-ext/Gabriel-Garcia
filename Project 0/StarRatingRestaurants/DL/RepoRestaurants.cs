@@ -55,6 +55,27 @@ namespace DL
 
 
         }
+
+        public List<Restaurant> DisplayAllRestLocation()
+        {
+            string selectCommandString = $"SELECT * FROM Restaurants;";
+            using SqlConnection connection = new(sConnectToDatabase);
+            using SqlCommand command = new(selectCommandString, connection);
+            connection.Open();
+            using SqlDataReader reader = command.ExecuteReader();
+            var vRestaurant = new List<Restaurant>();
+            while (reader.Read())
+            {
+                vRestaurant.Add(new Restaurant
+                {
+                    Id = reader.GetString(0),
+                    Name = reader.GetString(1)
+                });
+            }
+            connection.Close();
+            return vRestaurant;
+        }
+
         public List<Restaurant> SearchRestaurants( string WhereIt, string equalsTo)
         {
             string selectCommandString = $"SELECT * FROM Restaurants WHERE {WhereIt} = '{equalsTo}'";

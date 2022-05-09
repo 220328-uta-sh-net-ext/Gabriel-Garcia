@@ -7,6 +7,7 @@ namespace DL
         Restaurant AddRestaurant(Restaurant rest);
         List<Restaurant> SearchRestaurants(string WhereIt, string equalsTo);
         List<Restaurant> SearchRestLocation(string WhereIt, string equalsTo);
+        List<Restaurant> DisplayAllRestLocation();
         void DeleteRestaurant(string id);
     }
     public interface IRepositoryU

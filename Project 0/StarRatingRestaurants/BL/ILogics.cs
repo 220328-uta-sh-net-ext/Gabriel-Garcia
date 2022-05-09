@@ -7,6 +7,7 @@ namespace BL
         Restaurant AddRestaurant(Restaurant r);
         List<Restaurant> SearchRestaurant(string whereIt, string equalsTo);
         List<Restaurant> SearchRestLocation(string whereIt, string equalsTo);
+        List<Restaurant> DisplayAllRestaurants();
         void DeleteRestaurant(string id);
     }
     public interface IUserLogic

@@ -29,7 +29,7 @@ internal class StartMenu : IMenus
                 return "LoginUser";
             case "2":
                 Console.Clear();
-                return "AddUser";
+                return "CreateUser";
             case "3":
                 Console.Clear();
                 return "FindRestaurant";

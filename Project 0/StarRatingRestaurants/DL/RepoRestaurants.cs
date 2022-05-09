@@ -12,6 +12,7 @@ namespace DL
         }
         public Restaurant AddRestaurant(Restaurant rest)
         {
+
             string command = "INSERT INTO Restaurants (Id,Name) VALUES (@id,@name);";
             using SqlConnection conectionOne = new(sConnectToDatabase);
             using SqlCommand commandOne = new(command, conectionOne);
@@ -38,28 +39,25 @@ namespace DL
         }
         public void DeleteRestaurant(string id)
         {
-            string sCommand = $"DELETE FROM Restaurants WHERE Id = '{id}';";
-            using SqlConnection sConectionToRest = new(sConnectToDatabase);
-            using SqlCommand sSqlCommandR = new(sCommand, sConectionToRest);
-            sConectionToRest.Open();
-            sSqlCommandR.ExecuteNonQuery();
-            sConectionToRest.Close();
-            sCommand = $"DELETE FROM Location WHERE Id = '{id}';";
-            using SqlConnection sConectionLocation = new(sConnectToDatabase);
-            using SqlCommand sSqlCommandL = new(sCommand, sConectionLocation);
-            sConectionLocation.Open();
-            sSqlCommandL.ExecuteNonQuery();
-            sConectionLocation.Close();
-            sCommand = $"DELETE FROM Reviews WHERE Id = '{id}';";
-            using SqlConnection sConectionReview = new(sConnectToDatabase);
-            using SqlCommand sSqlCommand = new(sCommand, sConectionReview);
-            sConectionReview.Open();
-            sSqlCommand.ExecuteNonQuery();
-            sConectionReview.Close();
+            string command = $"DELETE FROM Location WHERE Id = '{id}';";
+            using SqlConnection conectionTwo = new(sConnectToDatabase);
+            using SqlCommand commandTwo = new(command, conectionTwo);
+            conectionTwo.Open();
+            commandTwo.ExecuteReader();
+            conectionTwo.Close();
+
+            command = $"DELETE FROM Restaurants WHERE Id = '{id}';";
+            using SqlConnection conectionOne = new(sConnectToDatabase);
+            using SqlCommand commandOne = new(command, conectionOne);
+            conectionOne.Open();
+            commandOne.ExecuteReader();
+            conectionOne.Close();
+
+
         }
-        public List<Restaurant> DisplayRestaurants(string table, string type, string val)
+        public List<Restaurant> SearchRestaurants( string WhereIt, string equalsTo)
         {
-            string selectCommandString = $"SELECT * FROM {table} WHERE {type} = '{val}'";
+            string selectCommandString = $"SELECT * FROM Restaurants WHERE {WhereIt} = '{equalsTo}'";
             using SqlConnection connection = new(sConnectToDatabase);
             using SqlCommand command = new(selectCommandString, connection);
             connection.Open();
@@ -69,15 +67,32 @@ namespace DL
             {
                 vRestaurant.Add(new Restaurant
                 {
-                    Name = reader.GetString(0),
-                    Id = reader.GetString(1),
-                    Country = reader.GetString(2),
-                    State = reader.GetString(3),
-                    City = reader.GetString(4),
+                    Id = reader.GetString(0),
+                    Name = reader.GetString(1)
+                });
+            }
+            connection.Close();
+            return vRestaurant;
+        }
+        public List<Restaurant> SearchRestLocation(string WhereIt, string equalsTo)
+        {
+            string selectCommandString = $"SELECT * FROM Location WHERE {WhereIt} = '{equalsTo}'";
+            using SqlConnection connection = new(sConnectToDatabase);
+            using SqlCommand command = new(selectCommandString, connection);
+            connection.Open();
+            using SqlDataReader reader = command.ExecuteReader();
+            var vRestaurant = new List<Restaurant>();
+            while (reader.Read())
+            {
+                vRestaurant.Add(new Restaurant
+                {
+                    Country = reader.GetString(1),
+                    State = reader.GetString(2),
+                    City = reader.GetString(3),
                     Zipcode = reader.GetString(4)
                 });
             }
-
+            connection.Close();
             return vRestaurant;
         }
     }

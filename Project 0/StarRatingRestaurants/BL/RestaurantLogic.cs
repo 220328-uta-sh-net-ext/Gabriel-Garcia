@@ -3,12 +3,14 @@ using Models;
 
 namespace BL
 {
-    public class RestaurantLogic : IRestaurantLogic
+    public class RestaurantLogic : IRestaurantLogic, IReviewLogic
     {
         readonly IRepositoryR repo;
-        public RestaurantLogic(IRepositoryR repo)
+        readonly IRepositoryRev repoRev;
+        public RestaurantLogic(IRepositoryR repo, IRepositoryRev repoRev)
         {
             this.repo = repo;
+            this.repoRev = repoRev;
         }
         public Restaurant AddRestaurant(Restaurant r)
         {
@@ -17,10 +19,22 @@ namespace BL
         public void DeleteRestaurant(string id)
         {
             repo.DeleteRestaurant(id);
+            repoRev.DeleteReviews("Id", id);
         }
-        public List<Restaurant> SearchRestaurant(string table, string type, string value)
+
+        public List<Reviews> DisplayReview(string whereIt, string equalsTo)
         {
-            List<Restaurant>? restaurants = repo.DisplayRestaurants(table, type, value);
+            List<Reviews>? reviews = repoRev.DisplayReviews(whereIt, equalsTo);
+            return reviews;
+        }
+        public List<Restaurant> SearchRestLocation(string whereIt, string equalsTo)
+        {
+            List<Restaurant>? restaurants = repo.SearchRestLocation(whereIt, equalsTo);
+            return restaurants;
+        }
+        public List<Restaurant> SearchRestaurant( string whereIt, string equalsTo)
+        {
+            List<Restaurant>? restaurants = repo.SearchRestaurants(whereIt, equalsTo);
             return restaurants;
         }
     }

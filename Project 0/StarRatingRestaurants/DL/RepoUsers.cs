@@ -3,7 +3,7 @@ using Models;
 
 namespace DL
 {
-    public class RepoUsers
+    public class RepoUsers : IRepositoryU
     {
         private readonly string sConnectToDatabase;
         public RepoUsers(string sConnectToDatabase)
@@ -27,7 +27,7 @@ namespace DL
             command.ExecuteNonQuery();
             return user;
         }
-        public void DeleteUser(string user, string id)
+        public void DeleteUser(string user)
         {
             string sCommand = $"DELETE FROM Restaurants WHERE UserName = '{user}';";
             using SqlConnection sConectionToUser = new(sConnectToDatabase);
@@ -35,16 +35,10 @@ namespace DL
             sConectionToUser.Open();
             sSqlCommandU.ExecuteNonQuery();
             sConectionToUser.Close();
-            sCommand = $"DELETE FROM Reviews WHERE ReviewerId = '{id}';";
-            using SqlConnection sConectionReview = new(sConnectToDatabase);
-            using SqlCommand sSqlCommand = new(sCommand, sConectionReview);
-            sConectionReview.Open();
-            sSqlCommand.ExecuteNonQuery();
-            sConectionReview.Close();
         }
-        public List<User> DisplayUser(string name)
+        public List<User> DisplayUser(string WhereIt, string equalsTo)
         {
-            string selectCommandString = "SELECT * FROM Users";
+            string selectCommandString = $"SELECT * FROM Users WHERE {WhereIt} = '{equalsTo}'";
             using SqlConnection connection = new(sConnectToDatabase);
             using SqlCommand command = new(selectCommandString, connection);
             connection.Open();

@@ -10,7 +10,9 @@ string connectinStrring = File.ReadAllText(connectinStrringFilePath);
 //IRepositoryU repoU = new RepositoryU(connectinStrring);
 //IUserLogic Ulogic = new UserLogic(repoU);
 IRepositoryR repoR = new RepoRestaurants(connectinStrring);
-IRestaurantLogic Rlogic = new RestaurantLogic(repoR);
+IRepositoryRev repoRev = new RepoReview(connectinStrring);
+IRestaurantLogic Rlogic = new RestaurantLogic(repoR, repoRev);
+IReviewLogic logicR = new RestaurantLogic(repoR, repoRev);
 
 //Log.Logger = new LoggerConfiguration().WriteTo.File("./Logs/user.text").CreateLogger();
 
@@ -39,7 +41,7 @@ while (loop)
             //menu = new AddUser(Ulogic);
             break;
         case "FindRestaurant":
-            menu = new FindRestaurant(Rlogic);
+            menu = new FindRestaurant(Rlogic, logicR);
             break;
         //--------------------UserManus----------------
         case "UserMenu":

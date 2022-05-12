@@ -29,20 +29,21 @@ namespace DL
         }
         public void DeleteUser(string user)
         {
-            string sCommand = $"DELETE FROM Restaurants WHERE UserName = '{user}';";
-            using SqlConnection sConectionToUser = new(sConnectToDatabase);
-            using SqlCommand sSqlCommandU = new(sCommand, sConectionToUser);
-            sConectionToUser.Open();
-            sSqlCommandU.ExecuteNonQuery();
-            sConectionToUser.Close();
-        }
-        public List<User> DisplayUser(string WhereIt, string equalsTo)
-        {
-            string selectCommandString = $"SELECT * FROM Users WHERE {WhereIt} = '{equalsTo}'";
+            string command = $"DELETE FROM Users WHERE UserName = '{user}';";
             using SqlConnection connection = new(sConnectToDatabase);
-            using SqlCommand command = new(selectCommandString, connection);
+            using SqlCommand sqlCommand = new(command, connection);
             connection.Open();
-            using SqlDataReader reader = command.ExecuteReader();
+            sqlCommand.ExecuteReader();
+            connection.Close();
+        }
+
+        public List<User> DisplayAllUser()
+        {
+            string command = $"SELECT * FROM Users";
+            using SqlConnection connection = new(sConnectToDatabase);
+            using SqlCommand sqlCommand = new(command, connection);
+            connection.Open();
+            using SqlDataReader reader = sqlCommand.ExecuteReader();
             var user = new List<User>();
             while (reader.Read())
             {
@@ -55,6 +56,30 @@ namespace DL
                     ReviewerId = reader.GetString(5)
                 });
             }
+            connection.Close();
+            return user;
+        }
+
+        public List<User> SearchUser(string WhereIt, string equalsTo)
+        {
+            string command = $"SELECT * FROM Users WHERE {WhereIt} = '{equalsTo}'";
+            using SqlConnection connection = new(sConnectToDatabase);
+            using SqlCommand sqlCommand = new(command, connection);
+            connection.Open();
+            using SqlDataReader reader = sqlCommand.ExecuteReader();
+            var user = new List<User>();
+            while (reader.Read())
+            {
+                user.Add(new User
+                {
+                    FirstName = reader.GetString(0),
+                    LastName = reader.GetString(1),
+                    Email = reader.GetString(2),
+                    UserName = reader.GetString(3),
+                    ReviewerId = reader.GetString(5)
+                });
+            }
+            connection.Close();
             return user;
         }
     }

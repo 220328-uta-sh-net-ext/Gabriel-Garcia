@@ -33,8 +33,9 @@ internal class LoginUser : IMenus
                 name = "";
                 return "StartMenu";
             case "1":
-                //return "AdminMenu";
-                return "UserMenu";
+                return "AdminMenu";
+                //UserMenu.username = "wjessdfn";
+                //return "UserMenu";
             case "2":
                 Console.Write("Enter Password: ");
                 pass = Console.ReadLine();

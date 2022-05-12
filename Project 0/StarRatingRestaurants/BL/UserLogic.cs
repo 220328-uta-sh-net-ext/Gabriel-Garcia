@@ -3,7 +3,7 @@ using Models;
 
 namespace BL
 {
-    public class UserLogic : IUserLogic
+    public class UserLogic : IUserLogic, IReviewLogic
     {
         readonly IRepositoryU repo;
         readonly IRepositoryRev repoRev;
@@ -28,9 +28,21 @@ namespace BL
             repoRev.DeleteReviews("ReviewerId", id);
         }
 
+        public List<User> DisplayAllUser()
+        {
+            List<User>? user = repo.DisplayAllUser();
+            return user;
+        }
+
+        public List<Reviews> DisplayReview(string whereIt, string equalsTo)
+        {
+            List<Reviews>? reviews = repoRev.DisplayReviews(whereIt, equalsTo);
+            return reviews;
+        }
+
         public List<User> SearchUser(string name, string equalsTo)
         {
-            List<User>? user = repo.DisplayUser(name, equalsTo);
+            List<User>? user = repo.SearchUser(name, equalsTo);
             return user;
         }
     }

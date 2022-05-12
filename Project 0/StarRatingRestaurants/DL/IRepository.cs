@@ -13,7 +13,8 @@ namespace DL
     public interface IRepositoryU
     {
         User AddUser(User user);
-        List<User> DisplayUser(string WhereIt, string equalsTo);
+        List<User> SearchUser(string WhereIt, string equalsTo);
+        List<User> DisplayAllUser();
         void DeleteUser(string user);
     }
     public interface IRepositoryRev

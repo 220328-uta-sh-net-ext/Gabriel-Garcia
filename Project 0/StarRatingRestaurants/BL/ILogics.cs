@@ -15,6 +15,7 @@ namespace BL
         User AddUser(User u);
         Reviews AddReviews(Reviews rev);
         List<User> SearchUser(string whereIt, string equalsTo);
+        List<User> DisplayAllUser();
         void DeleteUser(string user,string id);
     }
     public interface IReviewLogic

@@ -39,47 +39,52 @@ internal class FindRestaurant : IMenus
                 Console.Clear();
                 return "StartMenu";
             case "1":
-                DisplayAll();
-                return "FindRateRestaurant";
+                Display(0, "", "");
+                return "FindRestaurant";
             case "2":
                 if (Console.ReadLine() is not string id)
                     throw new InvalidDataException("");
-                Display("Name", id);
-                return "FindRateRestaurant";
+                Display(1, "Id", id);
+                return "FindRestaurant";
             case "3":
                 if (Console.ReadLine() is not string zip)
                     throw new InvalidDataException("");
-                Display("Name", zip);
-                return "FindRateRestaurant";
+                Display(1, "Zipcode", zip);
+                return "FindRestaurant";
             case "4":
                 if (Console.ReadLine() is not string city)
                     throw new InvalidDataException("");
-                Display("Name", city);
-                return "FindRateRestaurant";
+                Display(1, "City", city);
+                return "FindRestaurant";
             case "5":
                 if (Console.ReadLine() is not string state)
                     throw new InvalidDataException("");
-                Display("Name", state);
-                return "FindRateRestaurant";
+                Display(1, "State", state);
+                return "FindRestaurant";
             case "6":
                 if (Console.ReadLine() is not string country)
                     throw new InvalidDataException("");
-                Display("Country", country);
-                return "FindRateRestaurant";
+                Display(1,"Country", country);
+                return "FindRestaurant";
             case "7":
                 if (Console.ReadLine() is not string name)
                     throw new InvalidDataException("");
-                Display("Name", name);
-                return "FindRateRestaurant";
+                Display(1,"Name", name);
+                return "FindRestaurant";
             default:
                 Console.Clear();
                 Console.WriteLine($"Your input '{sInput}' is invalid!");
-                return "FindRateRestaurant";
+                return "FindRestaurant";
         }
     }
-    private void Display(string whereIt, string equalsTo)
+    private void Display(int i, string whereIt, string equalsTo)
     {
-        List<Restaurant>? restaurant = logic.SearchRestaurant(whereIt, equalsTo);
+
+        List<Restaurant>? restaurant = logic.DisplayAllRestaurants();
+        if (i == 1)
+            restaurant = logic.SearchRestaurant(whereIt, equalsTo);
+
+
         List<Restaurant>? restLocation;
         List<Reviews>? review;
         Console.WriteLine("\nRestaurant\n");
@@ -92,43 +97,17 @@ internal class FindRestaurant : IMenus
                 foreach (Restaurant l in restLocation)
                 {
                     Console.WriteLine($"Name: {r.Name}\tID: {r.Id}\n   Location: {l.Country} {l.State} {l.City} {l.Zipcode}");
+                    if (review.Count == 0)
+                        Console.WriteLine("Rating: Not Rated Yet!");
                     foreach (Reviews re in review)
                     {
                         Console.WriteLine($"Rating: {re.Rate} {re.Review}");
                     }
+                    Console.WriteLine();
                 }
             }
         }
         else
             Console.WriteLine("Restaurant Not Found");
-
-    }
-    private void DisplayAll()
-    {
-        List<Restaurant>? restaurant = logic.DisplayAllRestaurants();
-        List<Restaurant>? restLocation;
-        List<Reviews>? review;
-        Console.WriteLine("\nRestaurant\n");
-        if (restaurant.Count > 0)
-        {
-            foreach (Restaurant r in restaurant)
-            {
-                restLocation = logic.SearchRestLocation("Id", r.Id);
-                review = logicRev.DisplayReview("Id", r.Id);
-                foreach (Restaurant l in restLocation)
-                {
-                    Console.WriteLine($"Name: {r.Name}\tID: {r.Id}\n   Location: {l.Country} {l.State} {l.City} {l.Zipcode}");
-                    foreach (Reviews re in review)
-                    {   if (re.Review == "")
-                            Console.WriteLine("Not Yet Reated\n");
-                        else
-                            Console.WriteLine($"Rating: {re.Rate} {re.Review}\n");
-                    }
-                }
-            }
-        }
-        else
-            Console.WriteLine("Restaurant Not Found");
-
     }
 }

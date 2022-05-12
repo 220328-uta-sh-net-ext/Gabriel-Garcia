@@ -7,12 +7,13 @@ internal class FindRestaurant : IMenus
 {
     readonly IRestaurantLogic logic;
     readonly IReviewLogic logicRev;
+    public static string menu { get; set; }
+    public static string user { get; set; }
     public FindRestaurant(IRestaurantLogic logic, IReviewLogic logicRev)
     { this.logic = logic; this.logicRev = logicRev; }
     public void DisplayOptions()
     {
-        Console.WriteLine("-------- Find And Review Restaurant ---------\n");
-
+        Console.WriteLine("---------- Look Up A Restaurant -----------\n");
         Console.WriteLine("   <7> Find Restaurant By Name ");
         Console.WriteLine("   <6> Find Restaurant By Country ");
         Console.WriteLine("   <5> Find Restaurant By State ");
@@ -21,7 +22,7 @@ internal class FindRestaurant : IMenus
         Console.WriteLine("   <2> Find Restaurant By ID ");
         Console.WriteLine("   <1> Display All User ");
         Console.WriteLine("   <0> Go Back");
-        Console.WriteLine($"User: ****** ".PadLeft(34));
+        Console.WriteLine($"User: {user} ".PadLeft(34));
         Console.WriteLine("\n-------------------------------------------\n");
     }
 
@@ -37,36 +38,42 @@ internal class FindRestaurant : IMenus
         {
             case "0":
                 Console.Clear();
-                return "StartMenu";
+                return menu;
             case "1":
                 Display(0, "", "");
                 return "FindRestaurant";
             case "2":
+                Console.Write($"Enter Restaurant ID: ");
                 if (Console.ReadLine() is not string id)
                     throw new InvalidDataException("");
                 Display(1, "Id", id);
                 return "FindRestaurant";
             case "3":
+                Console.Write($"Enter Restaurant Zipcode: ");
                 if (Console.ReadLine() is not string zip)
                     throw new InvalidDataException("");
                 Display(1, "Zipcode", zip);
                 return "FindRestaurant";
             case "4":
+                Console.Write($"Enter Restaurant City: ");
                 if (Console.ReadLine() is not string city)
                     throw new InvalidDataException("");
                 Display(1, "City", city);
                 return "FindRestaurant";
             case "5":
+                Console.Write($"Enter Restaurant State: ");
                 if (Console.ReadLine() is not string state)
                     throw new InvalidDataException("");
                 Display(1, "State", state);
                 return "FindRestaurant";
             case "6":
+                Console.Write($"Enter Restaurant Country: ");
                 if (Console.ReadLine() is not string country)
                     throw new InvalidDataException("");
                 Display(1,"Country", country);
                 return "FindRestaurant";
             case "7":
+                Console.Write($"Enter Restaurant Name: ");
                 if (Console.ReadLine() is not string name)
                     throw new InvalidDataException("");
                 Display(1,"Name", name);

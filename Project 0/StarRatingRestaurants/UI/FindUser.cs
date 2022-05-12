@@ -10,13 +10,14 @@ internal class FindUser : IMenus
     { this.logic = logic; this.logicRev = logicRev; }
     public void DisplayOptions()
     {
-        Console.WriteLine("---- Find Users (Admin only) ----\n");
+        Console.WriteLine("----------- Find Users -----------\n");
         Console.WriteLine("   <5> Find User By First Name ");
         Console.WriteLine("   <4> Find User By Last Name ");
         Console.WriteLine("   <3> Find User By User Name ");
         Console.WriteLine("   <2> Find User By User ID ");
-        Console.WriteLine("   <1> Display All User ");
+        Console.WriteLine("   <1> Display All User "); 
         Console.WriteLine("   <0> Go Back");
+        Console.WriteLine("\n                       User: Admin");
         Console.WriteLine("----------------------------------\n");
     }
 
@@ -32,26 +33,30 @@ internal class FindUser : IMenus
         {
             case "0":
                 Console.Clear();
-                return "StartMenu";
+                return "AdminMenu";
             case "1":
                 Display(0, "", "");
                 return "FindUser";
             case "2":
+                Console.Write("\nEnter User's ID: ");
                 if (Console.ReadLine() is not string id)
                     throw new InvalidDataException("");
                 Display(1, "ReviewerId", id);
                 return "FindUser";
             case "3":
+                Console.Write("\nEnter User's Name: ");
                 if (Console.ReadLine() is not string uname)
                     throw new InvalidDataException("");
                 Display(1, "UserName", uname);
                 return "FindUser";
             case "4":
+                Console.Write("\nEnter User's Last Name: ");
                 if (Console.ReadLine() is not string lname)
                     throw new InvalidDataException("");
                 Display(1, "LastName", lname);
                 return "FindUser";
             case "5":
+                Console.Write("\nEnter User's First Name: ");
                 if (Console.ReadLine() is not string fname)
                     throw new InvalidDataException("");
                 Display(1, "FirstName", fname);

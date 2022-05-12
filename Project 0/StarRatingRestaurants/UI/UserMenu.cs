@@ -4,7 +4,6 @@ using Models;
 
 internal class UserMenu : IMenus
 {
-    static readonly User user = new();
     readonly IUserLogic logic;
 
     public UserMenu(IUserLogic logic)
@@ -16,8 +15,8 @@ internal class UserMenu : IMenus
     {
         Console.WriteLine("----------- User Menu -----------\n");
         Console.WriteLine("   <3> Delete Account");
-        Console.WriteLine("   <2> Find a Restaurant");
-        Console.WriteLine("   <1> Rate a Restaurant");
+        Console.WriteLine("   <2> Rate a Restaurant");
+        Console.WriteLine("   <1> Find a Restaurant");
         Console.WriteLine("   <0> Logout");
         Console.WriteLine($"User: {username}".PadLeft(34));
         Console.WriteLine("----------------------------------\n");
@@ -26,7 +25,8 @@ internal class UserMenu : IMenus
     public string GetSendOptions()
     {
         Console.Write("   > ");
-        string sInput = Console.ReadLine();
+        if (Console.ReadLine() is not string sInput)
+            throw new InvalidDataException("");
         Console.Write("\n");
 
         switch (sInput)
@@ -36,9 +36,13 @@ internal class UserMenu : IMenus
                 return "StartMenu";
             case "1":
                 Console.Clear();
+                FindRestaurant.menu = "UserMenu";
+                FindRestaurant.user = username;
                 return "FindRestaurant";
             case "2":
                 Console.Clear();
+                FindRestaurant.menu = "UserMenu";
+                FindRestaurant.user = username;
                 return "RateRestaurant";
             case "3":
                 Console.Clear();
@@ -52,6 +56,7 @@ internal class UserMenu : IMenus
     private string DeleteAccount()
     {
         string id = "";
+        Console.WriteLine("Enter <Yes> to Delete or Enter anything else for <No>\n");
         Console.Write("Would you like to Delete your Account:");
         if (Console.ReadLine() is not string sInput)
             throw new InvalidDataException("");
@@ -62,7 +67,6 @@ internal class UserMenu : IMenus
             {
                 id = item.ReviewerId;
             }
-            Console.Write($"{id} {username}");
             logic.DeleteUser(username, id);
             return "StartMenu";
         }

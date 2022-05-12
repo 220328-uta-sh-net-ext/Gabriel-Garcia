@@ -32,6 +32,8 @@ internal class StartMenu : IMenus
                 return "CreateUser";
             case "3":
                 Console.Clear();
+                FindRestaurant.menu = "StartMenu";
+                FindRestaurant.user = "Guest";
                 return "FindRestaurant";
             default:
                 Console.Clear();

@@ -61,7 +61,7 @@ while (loop)
             menu = new AddRestaurant(Rlogic);
             break;
         case "DeleteRestaurant":
-            menu = new DeleteRestaurant();
+            menu = new DeleteRestaurant(Rlogic);
             break;
         //--------------------AllUserAction--------------
         case "FindRestaurant":

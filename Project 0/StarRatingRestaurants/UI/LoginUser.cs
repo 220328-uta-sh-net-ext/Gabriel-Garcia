@@ -12,7 +12,7 @@ internal class LoginUser : IMenus
     {
         Console.WriteLine("----------- Login Menu -----------\n");
         Console.WriteLine($"   <3> User Name: {name}");
-        Console.WriteLine("   <2> Password:");
+        Console.WriteLine("   <2> Password: ".PadRight((17 + pass.Length), '*'));
         Console.WriteLine($"   <1> Login");
         Console.WriteLine("   <0> Go Back\n");
         Console.WriteLine("\n----------------------------------\n");
@@ -21,9 +21,9 @@ internal class LoginUser : IMenus
     public string GetSendOptions()
     {
         Console.Write("   > ");
-        string sInput = Console.ReadLine();
+        if (Console.ReadLine() is not string sInput)
+            throw new InvalidDataException("");
         Console.Write("\n");
-        DateTime localDate = DateTime.Now;
 
         switch (sInput)
         {
@@ -33,15 +33,19 @@ internal class LoginUser : IMenus
                 name = "";
                 return "StartMenu";
             case "1":
-                return "AdminMenu";
-                //UserMenu.username = "wjessdfn";
-                //return "UserMenu";
+                UserMenu.username = name;
+                string logingin = logic.LogingIn(name, pass);
+                pass = "";
+                name = "";
+                return logingin;
             case "2":
+                pass = "";
                 Console.Write("Enter Password: ");
                 pass = Console.ReadLine();
                 Console.Clear();
                 return "LoginUser";
             case "3":
+                name = "";
                 Console.Write("Enter UserName: ");
                 name = Console.ReadLine();
                 Console.Clear();

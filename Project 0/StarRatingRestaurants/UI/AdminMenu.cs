@@ -11,14 +11,14 @@ internal class AdminMenu : IMenus
         Console.WriteLine("   <2> Find Restaurant");
         Console.WriteLine("   <1> Find a User");
         Console.WriteLine("   <0> Logout");
-        Console.WriteLine($"User: ".PadLeft(34));
         Console.WriteLine("----------------------------------\n");
     }
 
     public string GetSendOptions()
     {
         Console.Write("   > ");
-        string sInput = Console.ReadLine();
+        if (Console.ReadLine() is not string sInput)
+            throw new InvalidDataException("");
         Console.Write("\n");
 
         switch (sInput)
@@ -31,16 +31,20 @@ internal class AdminMenu : IMenus
                 return "FindUser";
             case "2":
                 Console.Clear();
+                FindRestaurant.menu = "AdminMenu";
+                FindRestaurant.user = "Admin";
                 return "FindRestaurant";
             case "3":
                 Console.Clear();
                 return "RateRestaurant";
             case "4":
                 Console.Clear();
+                FindRestaurant.menu = "AdminMenu";
+                FindRestaurant.user = "Admin";
                 return "AddRestaurant";
             case "5":
                 Console.Clear();
-                return "DeleteRestaruant";
+                return "DeleteRestaurant";
             default:
                 Console.Clear();
                 Console.WriteLine($"Your input '{sInput}' is invalid!");

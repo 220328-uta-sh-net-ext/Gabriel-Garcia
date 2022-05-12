@@ -40,6 +40,32 @@ namespace BL
             return reviews;
         }
 
+        public string LogingIn(string user, string pass)
+        {
+            List<User>? getUser = repo.SearchUser("UserName", user);
+            if (getUser.Count > 0 && getUser.Count == 1)
+            {
+                foreach (var u in getUser)
+                {
+                    if (user == "Admin" && pass == u.Password)
+                    { return "AdminMenu"; }
+                    else if (pass == u.Password)
+                    { return "UserMenu"; }
+                    else
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Sorry! Invalid UserName or Password.\n"); 
+                        return "LoginUser";
+                    }
+                }
+            }
+            else
+            {
+                Console.Clear();
+                Console.WriteLine("Sorry! Invalid User or Password.\n");
+            }
+            return "LoginUser";
+        }
         public List<User> SearchUser(string name, string equalsTo)
         {
             List<User>? user = repo.SearchUser(name, equalsTo);

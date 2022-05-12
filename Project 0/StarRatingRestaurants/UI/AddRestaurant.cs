@@ -6,7 +6,6 @@ internal class AddRestaurant : IMenus
 {
     readonly IRestaurantLogic logic;
     static readonly Restaurant rest = new();
-    private int iCount = 0;
     public AddRestaurant(IRestaurantLogic logic)
     {
         this.logic = logic;
@@ -34,12 +33,12 @@ internal class AddRestaurant : IMenus
                 GC.Collect();
                 return "AdminMenu";
             case "1":
-                rest.Id = localDate.Year.ToString()  + localDate.Month.ToString()  + localDate.Day.ToString() + iCount;
+                rest.Id = localDate.Year.ToString()  + localDate.Month.ToString()  + localDate.Day.ToString() + numberOfRestaurant();
                 logic.AddRestaurant(rest);
                 Console.WriteLine("Restaurant Added to the Database.\n");
                 Console.ReadLine();
                 GC.Collect();
-                Console.Clear(); numberOfRestaurant();
+                Console.Clear();
                 return "AddRestaurant";
             case "3":
                 Console.WriteLine("If Not Applicable Input <none>");
@@ -66,6 +65,7 @@ internal class AddRestaurant : IMenus
     }
     private int numberOfRestaurant()
     {
+        int iCount = 0;
         List<Restaurant>? rest = logic.DisplayAllRestaurants();
         Console.WriteLine("\nUsers: \n");
         if (rest.Count > 0)

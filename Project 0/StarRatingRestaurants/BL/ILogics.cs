@@ -17,6 +17,7 @@ namespace BL
         List<User> SearchUser(string whereIt, string equalsTo);
         List<User> DisplayAllUser();
         void DeleteUser(string user,string id);
+        string LogingIn(string user,string pass);
     }
     public interface IReviewLogic
     {

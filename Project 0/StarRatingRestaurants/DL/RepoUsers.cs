@@ -25,6 +25,7 @@ namespace DL
             command.Parameters.AddWithValue("@rid", user.ReviewerId);
             connection.Open();
             command.ExecuteNonQuery();
+            connection.Close();
             return user;
         }
         public void DeleteUser(string user)
@@ -39,7 +40,7 @@ namespace DL
 
         public List<User> DisplayAllUser()
         {
-            string command = $"SELECT * FROM Users";
+            string command = $"SELECT * FROM Users WHERE UserName != 'Admin'";
             using SqlConnection connection = new(sConnectToDatabase);
             using SqlCommand sqlCommand = new(command, connection);
             connection.Open();
@@ -76,6 +77,7 @@ namespace DL
                     LastName = reader.GetString(1),
                     Email = reader.GetString(2),
                     UserName = reader.GetString(3),
+                    Password = reader.GetString(4),
                     ReviewerId = reader.GetString(5)
                 });
             }

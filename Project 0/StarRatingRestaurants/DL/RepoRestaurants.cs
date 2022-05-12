@@ -14,26 +14,26 @@ namespace DL
         {
 
             string command = "INSERT INTO Restaurants (Id,Name) VALUES (@id,@name);";
-            using SqlConnection conectionOne = new(sConnectToDatabase);
-            using SqlCommand commandOne = new(command, conectionOne);
+            using SqlConnection connectionOne = new(sConnectToDatabase);
+            using SqlCommand commandOne = new(command, connectionOne);
             commandOne.Parameters.AddWithValue("@name", rest.Name);
             commandOne.Parameters.AddWithValue("@id", rest.Id);
-            conectionOne.Open();
+            connectionOne.Open();
             commandOne.ExecuteNonQuery();
-            conectionOne.Close();
+            connectionOne.Close();
 
             command = "INSERT INTO Location  (Id,Country,State,City,Zipcode) VALUES" +
                                             " (@id,@country,@state,@city,@zipcode);";
-            using SqlConnection conectionTwo = new(sConnectToDatabase);
-            using SqlCommand commandTwo = new(command, conectionTwo);
+            using SqlConnection connectionTwo = new(sConnectToDatabase);
+            using SqlCommand commandTwo = new(command, connectionTwo);
             commandTwo.Parameters.AddWithValue("@id", rest.Id);
             commandTwo.Parameters.AddWithValue("@country", rest.Country);
             commandTwo.Parameters.AddWithValue("@state", rest.State);
             commandTwo.Parameters.AddWithValue("@city", rest.City);
             commandTwo.Parameters.AddWithValue("@zipcode", rest.Zipcode);
-            conectionTwo.Open();
+            connectionTwo.Open();
             commandTwo.ExecuteNonQuery();
-            conectionTwo.Close();
+            connectionTwo.Close();
 
             return rest;
         }

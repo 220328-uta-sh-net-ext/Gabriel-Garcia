@@ -19,5 +19,9 @@
             City = "";
             Zipcode = "";
         }
+        public override string ToString()
+        {
+            return $"\nRestaurant: {Name}\tID:{Id}\n\tLocation: {Country} {State} {City} {Zipcode}\n";
+        }
     }
 }

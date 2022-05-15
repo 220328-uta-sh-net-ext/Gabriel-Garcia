@@ -12,7 +12,7 @@ namespace DL
         }
         public Reviews AddReviews(Reviews Reviews)
         {
-            string selectCommandString = "INSERT INTO Review (Id,ReviewerId,Rate,Review) VALUES" +
+            string selectCommandString = "INSERT INTO Reviews (Id,ReviewerId,Rate,Review) VALUES" +
                                 "(@id,@rid,@rate,@review);";
 
             using SqlConnection connection = new(sConnectToDatabase);
@@ -27,9 +27,19 @@ namespace DL
             return Reviews;
         }
 
-        public void DeleteReviews(string WhereIt, string equalsTo)
+        public void DeleteReviews(string WhereIt, string equalsTo, string WhereItU, string EqualsToU)
         {
-            string command = $"DELETE FROM Reviews WHERE {WhereIt} = '{equalsTo}';";
+            string command = $"DELETE FROM Reviews WHERE {WhereIt} = '{equalsTo}' AND {WhereItU} = '{EqualsToU}';";
+            using SqlConnection conection = new(sConnectToDatabase);
+            using SqlCommand sqlCommand = new(command, conection);
+            conection.Open();
+            sqlCommand.ExecuteReader();
+            conection.Close();
+        }
+
+        public void DeleteReviews(string WhereIt, string EqualsTo)
+        {
+            string command = $"DELETE FROM Reviews WHERE {WhereIt} = '{EqualsTo}';";
             using SqlConnection conection = new(sConnectToDatabase);
             using SqlCommand sqlCommand = new(command, conection);
             conection.Open();

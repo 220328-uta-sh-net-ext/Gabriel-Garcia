@@ -37,17 +37,18 @@ internal class LoginUser : IMenus
                 string logingin = logic.LogingIn(name, pass);
                 pass = "";
                 name = "";
+                Console.Clear();
                 return logingin;
             case "2":
                 pass = "";
                 Console.Write("Enter Password: ");
-                pass = Console.ReadLine();
+                pass += Console.ReadLine();
                 Console.Clear();
                 return "LoginUser";
             case "3":
                 name = "";
                 Console.Write("Enter UserName: ");
-                name = Console.ReadLine();
+                name += Console.ReadLine();
                 Console.Clear();
                 return "LoginUser";
             default:

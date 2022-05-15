@@ -86,7 +86,8 @@ internal class FindRestaurant : IMenus
     }
     private void Display(int i, string whereIt, string equalsTo)
     {
-
+        float fCount = 0;
+        float fTotal = 0;
         List<Restaurant>? restaurant = logic.DisplayAllRestaurants();
         if (i == 1)
             restaurant = logic.SearchRestaurant(whereIt, equalsTo);
@@ -100,18 +101,27 @@ internal class FindRestaurant : IMenus
             foreach (Restaurant r in restaurant)
             {
                 restLocation = logic.SearchRestLocation("Id", r.Id);
+                Console.WriteLine(r.Id);
                 review = logicRev.DisplayReview("Id", r.Id);
                 foreach (Restaurant l in restLocation)
                 {
                     Console.WriteLine($"Name: {r.Name}\tID: {r.Id}\n   Location: {l.Country} {l.State} {l.City} {l.Zipcode}");
                     if (review.Count == 0)
                         Console.WriteLine("Rating: Not Rated Yet!");
-                    foreach (Reviews re in review)
+                    else
                     {
-                        Console.WriteLine($"Rating: {re.Rate} {re.Review}");
+                        foreach (Reviews re in review)
+                        {
+                            fCount++;
+                            fTotal += re.Rate;
+                        }
+                        fTotal = fTotal / (fCount * 5.0f);
+                        Console.WriteLine($"Review {fCount} : {fTotal}");
                     }
                     Console.WriteLine();
                 }
+                fCount = 0;
+                fTotal = 0;
             }
         }
         else

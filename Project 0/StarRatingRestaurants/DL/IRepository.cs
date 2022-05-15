@@ -21,6 +21,7 @@ namespace DL
     {
         Reviews AddReviews(Reviews user);
         List<Reviews> DisplayReviews(string WhereIt, string equalsTo);
+        void DeleteReviews(string WhereIt, string EqualsTo,string WhereItU, string EqualsToU);
         void DeleteReviews(string WhereIt, string EqualsTo);
     }
 }

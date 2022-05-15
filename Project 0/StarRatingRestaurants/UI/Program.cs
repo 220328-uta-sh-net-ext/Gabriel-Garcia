@@ -68,7 +68,7 @@ while (loop)
             menu = new FindRestaurant(Rlogic, logicR);
             break;
         case "RateRestaurant":
-            menu = new RateRestaurant();
+            menu = new RateRestaurant(Ulogic,logicUR,Rlogic);
             break;
         //-----------------------------------------------
         default:

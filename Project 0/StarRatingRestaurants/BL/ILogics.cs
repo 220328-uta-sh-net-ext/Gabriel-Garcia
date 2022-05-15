@@ -21,6 +21,7 @@ namespace BL
     }
     public interface IReviewLogic
     {
+        void DeleteReview(string whereIt, string equalsTo, string whereItU, string equalsToU);
         List<Reviews> DisplayReview(string whereIt, string equalsTo);
     }
 }

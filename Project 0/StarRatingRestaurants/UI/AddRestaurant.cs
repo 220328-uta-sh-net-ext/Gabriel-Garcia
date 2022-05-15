@@ -40,7 +40,7 @@ internal class AddRestaurant : IMenus
                 GC.Collect();
                 Console.Clear();
                 return "AddRestaurant";
-            case "3":
+            case "2":
                 Console.WriteLine("If Not Applicable Input <none>");
                 Console.Write("Enter Contry: ");
                 rest.Country = Console.ReadLine();
@@ -52,7 +52,7 @@ internal class AddRestaurant : IMenus
                 rest.Zipcode = Console.ReadLine();
                 Console.Clear();
                 return "AddRestaurant";
-            case "4":
+            case "3":
                 Console.Write("Enter Name: ");
                 rest.Name = Console.ReadLine();
                 Console.Clear();
@@ -67,7 +67,6 @@ internal class AddRestaurant : IMenus
     {
         int iCount = 0;
         List<Restaurant>? rest = logic.DisplayAllRestaurants();
-        Console.WriteLine("\nUsers: \n");
         if (rest.Count > 0)
         {
             foreach (Restaurant r in rest)
@@ -75,8 +74,6 @@ internal class AddRestaurant : IMenus
                 iCount++;
             }
         }
-        else
-            Console.WriteLine("User Not Found");
         Console.WriteLine(iCount);
         return 0;
     }

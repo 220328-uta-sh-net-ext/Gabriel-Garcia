@@ -41,8 +41,8 @@ internal class UserMenu : IMenus
                 return "FindRestaurant";
             case "2":
                 Console.Clear();
-                FindRestaurant.menu = "UserMenu";
-                FindRestaurant.user = username;
+                RateRestaurant.menu = "UserMenu";
+                RateRestaurant.user = username;
                 return "RateRestaurant";
             case "3":
                 Console.Clear();

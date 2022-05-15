@@ -42,5 +42,10 @@ namespace BL
             List<Restaurant>? restaurants = repo.DisplayAllRestLocation();
             return restaurants;
         }
+
+        public void DeleteReview(string whereIt, string equalsTo, string whereItU, string equalsToU)
+        {
+            repoRev.DeleteReviews(whereIt, equalsTo,whereItU,equalsToU);
+        }
     }
 }

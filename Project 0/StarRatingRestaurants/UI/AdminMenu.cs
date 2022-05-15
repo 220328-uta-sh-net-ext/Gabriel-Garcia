@@ -7,8 +7,8 @@ internal class AdminMenu : IMenus
         Console.WriteLine("----------- Admin Menu -----------\n");
         Console.WriteLine("   <5> Delete Restaurant");
         Console.WriteLine("   <4> Add a Restaurant");
-        Console.WriteLine("   <3> Review Restaurant");
-        Console.WriteLine("   <2> Find Restaurant");
+        Console.WriteLine("   <3> Rate a Restaurant");
+        Console.WriteLine("   <2> Find a Restaurant");
         Console.WriteLine("   <1> Find a User");
         Console.WriteLine("   <0> Logout");
         Console.WriteLine("----------------------------------\n");
@@ -36,11 +36,11 @@ internal class AdminMenu : IMenus
                 return "FindRestaurant";
             case "3":
                 Console.Clear();
+                RateRestaurant.menu = "AdminMenu";
+                RateRestaurant.user = "Admin";
                 return "RateRestaurant";
             case "4":
                 Console.Clear();
-                FindRestaurant.menu = "AdminMenu";
-                FindRestaurant.user = "Admin";
                 return "AddRestaurant";
             case "5":
                 Console.Clear();

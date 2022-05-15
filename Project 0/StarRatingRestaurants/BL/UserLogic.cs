@@ -22,6 +22,12 @@ namespace BL
         {
             return repo.AddUser(u);
         }
+
+        public void DeleteReview(string whereIt, string equalsTo, string whereItU, string equalsToU)
+        {
+            repoRev.DeleteReviews(whereIt, equalsTo, whereItU, equalsToU);
+        }
+
         public void DeleteUser(string user, string id)
         {
             repo.DeleteUser(user);

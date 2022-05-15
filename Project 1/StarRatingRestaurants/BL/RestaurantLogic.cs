@@ -39,7 +39,7 @@ namespace BL
         }
         public List<Restaurant> DisplayAllRestaurants()
         {
-            List<Restaurant>? restaurants = repo.DisplayAllRestLocation();
+            List<Restaurant>? restaurants = repo.DisplayAllRestaurant();
             return restaurants;
         }
 

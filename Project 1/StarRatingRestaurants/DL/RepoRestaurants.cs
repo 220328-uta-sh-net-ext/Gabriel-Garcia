@@ -55,8 +55,7 @@ namespace DL
 
 
         }
-
-        public List<Restaurant> DisplayAllRestLocation()
+        public List<Restaurant> DisplayAllRestaurant()
         {
             string selectCommandString = $"SELECT * FROM Restaurants;";
             using SqlConnection connection = new(sConnectToDatabase);
@@ -75,7 +74,6 @@ namespace DL
             connection.Close();
             return vRestaurant;
         }
-
         public List<Restaurant> SearchRestaurants( string WhereIt, string equalsTo)
         {
             string selectCommandString = $"SELECT * FROM Restaurants WHERE {WhereIt} = '{equalsTo}'";
@@ -114,6 +112,142 @@ namespace DL
                 });
             }
             connection.Close();
+            return vRestaurant;
+        }
+        //---------------Async----------------
+        public async Task<Restaurant> AddRestaurantAsync(Restaurant rest)
+        {
+            string command = "INSERT INTO Restaurants (Id,Name) VALUES (@id,@name);";
+            using SqlConnection connectionOne = new(sConnectToDatabase);
+            using SqlCommand commandOne = new(command, connectionOne);
+            commandOne.Parameters.AddWithValue("@name", rest.Name);
+            commandOne.Parameters.AddWithValue("@id", rest.Id);
+            try
+            {
+                await connectionOne.OpenAsync();
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            try
+            {
+                await commandOne.ExecuteNonQueryAsync();
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            await connectionOne.CloseAsync();
+
+            command = "INSERT INTO Location  (Id,Country,State,City,Zipcode) VALUES" +
+                                            " (@id,@country,@state,@city,@zipcode);";
+            using SqlConnection connectionTwo = new(sConnectToDatabase);
+            using SqlCommand commandTwo = new(command, connectionTwo);
+            commandTwo.Parameters.AddWithValue("@id", rest.Id);
+            commandTwo.Parameters.AddWithValue("@country", rest.Country);
+            commandTwo.Parameters.AddWithValue("@state", rest.State);
+            commandTwo.Parameters.AddWithValue("@city", rest.City);
+            commandTwo.Parameters.AddWithValue("@zipcode", rest.Zipcode);
+            try
+            {
+                await connectionTwo.OpenAsync();
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            try
+            {
+                await commandTwo.ExecuteNonQueryAsync();
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            await connectionTwo.CloseAsync();
+
+            return rest;
+        }
+        public async Task<List<Restaurant>> DisplayAllRestaurantAsync()
+        {
+            string selectCommandString = $"SELECT * FROM Restaurants;";
+            using SqlConnection connection = new(sConnectToDatabase);
+            using SqlCommand command = new(selectCommandString, connection);
+            try
+            {
+                await connection.OpenAsync();
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            using SqlDataReader reader = await command.ExecuteReaderAsync();
+            var vRestaurant = new List<Restaurant>();
+            while (await reader.ReadAsync())
+            {
+                vRestaurant.Add(new Restaurant
+                {
+                    Id = reader.GetString(0),
+                    Name = reader.GetString(1)
+                });
+            }
+            await connection.CloseAsync();
+            return vRestaurant;
+        }
+        public async Task<List<Restaurant>> SearchRestaurantsAsync(string WhereIt, string equalsTo)
+        {
+            string selectCommandString = $"SELECT * FROM Restaurants WHERE {WhereIt} = '{equalsTo}'";
+            using SqlConnection connection = new(sConnectToDatabase);
+            using SqlCommand command = new(selectCommandString, connection);
+            try
+            {
+                await connection.OpenAsync();
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            using SqlDataReader reader = await command.ExecuteReaderAsync();
+            var vRestaurant = new List<Restaurant>();
+            while (await reader.ReadAsync())
+            {
+                vRestaurant.Add(new Restaurant
+                {
+                    Id = reader.GetString(0),
+                    Name = reader.GetString(1)
+                });
+            }
+            await connection.CloseAsync();
+            return vRestaurant;
+        }
+        public async Task<List<Restaurant>> SearchRestLocationAsync(string WhereIt, string equalsTo)
+        {
+            string selectCommandString = $"SELECT * FROM Location WHERE {WhereIt} = '{equalsTo}'";
+            using SqlConnection connection = new(sConnectToDatabase);
+            using SqlCommand command = new(selectCommandString, connection);
+            try
+            {
+                await connection.OpenAsync();
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            using SqlDataReader reader = await command.ExecuteReaderAsync();
+            var vRestaurant = new List<Restaurant>();
+            while (await reader.ReadAsync())
+            {
+                vRestaurant.Add(new Restaurant
+                {
+                    Country = reader.GetString(1),
+                    State = reader.GetString(2),
+                    City = reader.GetString(3),
+                    Zipcode = reader.GetString(4)
+                });
+            }
+            await connection.CloseAsync();
             return vRestaurant;
         }
     }

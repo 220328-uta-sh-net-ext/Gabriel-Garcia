@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models;
+using BL;
 
 namespace API.Controllers
 {
@@ -8,6 +9,12 @@ namespace API.Controllers
     [ApiController]
     public class RestaurantController : ControllerBase
     {
+        private IRestaurantLogic _restLogic;
+        public RestaurantController(IRestaurantLogic _restLogic)
+        {
+            this._restLogic = _restLogic;
+        }
+
         private static List<Restaurant> _restaurants = new List<Restaurant>
         {
             new Restaurant{Id = "id",Name = "name",Country = "c",State = "s",City = "cc",Zipcode = "z"},
@@ -18,15 +25,18 @@ namespace API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult< List<Restaurant>> Get()
         {
-            return Ok( _restaurants);
+            var _rest = Ok( _restLogic.DisplayAllRestaurants());
+            return Ok( _rest );
         }
         [HttpGet("name")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<Restaurant> Get(string name)
         {
-            var rest = _restaurants.Find(x => x.Name.Contains(name));
-            if (rest == null)
+            if (name == null)
+                return BadRequest("Enter a name please");
+            var rest = _restLogic.SearchRestaurant("Name",name);
+            if (rest.Count <= 0)
                 return NotFound("Restaurant not Found");
             return Ok(rest);
         }
@@ -38,7 +48,7 @@ namespace API.Controllers
         {
             if(rest == null)
             { return BadRequest("Invalid Restaurant"); }
-            _restaurants.Add(rest);
+            _restLogic.AddRestaurant(rest);
             return CreatedAtAction("Get",rest);
         }
         [HttpPut]

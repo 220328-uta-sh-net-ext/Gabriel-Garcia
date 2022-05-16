@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32421.90
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UI", "UI\UI.csproj", "{DE4782A8-852D-454F-B468-F22923F96253}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZTesting", "ZTesting\ZTesting.csproj", "{8B0228F7-8650-4F19-AE01-CFBE907962F1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "Models\Models.csproj", "{5D7B0FFD-FE5A-4340-BB0A-34D12DAC3719}"
@@ -13,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DL", "DL\DL.csproj", "{94FF
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BL", "BL\BL.csproj", "{A7C8536B-4240-439C-9FC3-053E529797C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "API\API.csproj", "{2EF38845-F678-4E8C-A7A1-FB677A87648B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "API\API.csproj", "{2EF38845-F678-4E8C-A7A1-FB677A87648B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,10 +19,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{DE4782A8-852D-454F-B468-F22923F96253}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DE4782A8-852D-454F-B468-F22923F96253}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DE4782A8-852D-454F-B468-F22923F96253}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DE4782A8-852D-454F-B468-F22923F96253}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8B0228F7-8650-4F19-AE01-CFBE907962F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8B0228F7-8650-4F19-AE01-CFBE907962F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B0228F7-8650-4F19-AE01-CFBE907962F1}.Release|Any CPU.ActiveCfg = Release|Any CPU

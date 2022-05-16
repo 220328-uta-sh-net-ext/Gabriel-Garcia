@@ -7,13 +7,11 @@ namespace DL
         Restaurant AddRestaurant(Restaurant rest);
         List<Restaurant> DisplayAllRestaurant();
         List<Restaurant> SearchRestaurants(string WhereIt, string equalsTo);
-        List<Restaurant> SearchRestLocation(string WhereIt, string equalsTo);
         void DeleteRestaurant(string id);
         // A-Sync
         Task<Restaurant> AddRestaurantAsync(Restaurant rest);
         Task<List<Restaurant>> DisplayAllRestaurantAsync();
         Task<List<Restaurant>> SearchRestaurantsAsync(string WhereIt, string equalsTo);
-        Task<List<Restaurant>> SearchRestLocationAsync(string WhereIt, string equalsTo);
     }
     public interface IRepositoryU
     {
@@ -35,6 +33,17 @@ namespace DL
         // A-Sync
         Task<Reviews> AddReviewsAsync(Reviews user);
         Task<List<Reviews>> DisplayReviewsAsync(string WhereIt, string equalsTo);
+
+    }
+    public interface IRepositoryLoc
+    {
+        Location AddRestLocation(Location rest);
+        List<Location> DisplayAllRestLocation();
+        List<Location> SearchRestLocation(string WhereIt, string equalsTo);
+        void DeleteRestLocation(string id);
+        Task<Location> AddRestLocationAsync(Location rest);
+        Task<List<Location>> DisplayAllRestLocationAsync();
+        Task<List<Location>> SearchRestLocationAsync(string WhereIt, string equalsTo);
 
     }
 }

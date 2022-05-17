@@ -16,7 +16,7 @@ namespace API.Controllers
     public class LoginController : ControllerBase
     {
 
-        static readonly User user = new();
+        //static readonly User user = new();
         //private IUserLogic _userLogic;
         //private IRestaurantLogic _restLogic;
         //private IReviewLogic _revLogic;
@@ -26,6 +26,20 @@ namespace API.Controllers
         {
             this._repo = _repo;
         }
+        //[AllowAnonymous]
+        [HttpPost]
+        [Route("Admin")]
+        public IActionResult AdminLogin(User user)
+        {
+            var token = _repo.Authenticate(user);
+            if (token == null)
+                return Unauthorized();
+            return Ok(token);
+        }
+        /*//[AllowAnonymous]
+        [HttpPost]
+        [Route("User")]
+        
         //[AllowAnonymous]
         [HttpPost]
         [Route("Admin")]

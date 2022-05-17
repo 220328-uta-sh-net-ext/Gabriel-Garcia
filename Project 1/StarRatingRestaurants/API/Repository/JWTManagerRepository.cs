@@ -34,7 +34,8 @@ namespace API.Repository
                 (
                     new Claim[]
                     {
-                        new Claim(ClaimTypes.Name, user.UserName)
+                        new Claim(ClaimTypes.Name, user.UserName),
+                        new Claim(ClaimTypes.Role, thisUser) 
                     }
                 ),
                     Expires = DateTime.UtcNow.AddMinutes(5),

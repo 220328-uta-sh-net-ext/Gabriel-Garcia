@@ -2,6 +2,9 @@
 
 namespace DL
 {
+    /// <summary>
+    /// This is the interface for all the databaselogic
+    /// </summary>
     public interface IRepositoryR
     {
         Restaurant AddRestaurant(Restaurant rest);
@@ -38,11 +41,11 @@ namespace DL
     }
     public interface IRepositoryLoc
     {
-        Location AddRestLocation(Location rest);
+        Location AddRestLocation(Location location);
         List<Location> DisplayAllRestLocation();
         List<Location> SearchRestLocation(string WhereIt, string equalsTo);
         void DeleteRestLocation(string id);
-        Task<Location> AddRestLocationAsync(Location rest);
+        Task<Location> AddRestLocationAsync(Location location);
         Task<List<Location>> DisplayAllRestLocationAsync();
         Task<List<Location>> SearchRestLocationAsync(string WhereIt, string equalsTo);
 

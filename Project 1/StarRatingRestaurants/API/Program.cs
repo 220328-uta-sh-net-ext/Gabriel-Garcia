@@ -48,10 +48,10 @@ builder.Services.AddScoped<IRepositoryRev>(repoRev => new RepoReview(connectinSt
 builder.Services.AddScoped<IRepositoryLoc>(repoLoc => new RepoLocation(connectinStrring));
 
 builder.Services.AddScoped<IRestaurantLogic, RestaurantLogic>();
-builder.Services.AddScoped<IReviewLogic, RestaurantLogic>();
-builder.Services.AddScoped<ILocationLogic, RestaurantLogic>();
+//builder.Services.AddScoped<IReviewLogic, RestaurantLogic>();
+//builder.Services.AddScoped<ILocationLogic, RestaurantLogic>();
 builder.Services.AddScoped<IUserLogic, UserLogic>();
-builder.Services.AddScoped<IReviewLogic, UserLogic>();
+//builder.Services.AddScoped<IReviewLogic, UserLogic>();
 
 builder.Services.AddScoped<IJWTManagerRepository, JWTManagerRepository>();
 

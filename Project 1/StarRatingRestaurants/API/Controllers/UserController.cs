@@ -16,19 +16,22 @@ namespace API.Controllers
         private readonly IRestaurantLogic _restLogic;
         private readonly IUserLogic _userLogic;
         private readonly IMemoryCache _mempryCache;
-        private IReviewLogic _revLogic;
-        public UserController(IRestaurantLogic _restLogic, IUserLogic _userLogic, IReviewLogic _revLogic, IMemoryCache _mempryCache)
+        //private IReviewLogic _revLogic;
+        public UserController(IRestaurantLogic _restLogic, IUserLogic _userLogic,  IMemoryCache _mempryCache)
         {
             this._restLogic = _restLogic;
             this._userLogic = _userLogic;
-            this._revLogic = _revLogic;
+            //this._revLogic = _revLogic;
             this._mempryCache = _mempryCache;
         }
-
+        /// <summary>
+        /// display all restaurant from the database
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("Display All Restaurants")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<Restaurant> GetDisplayAllRestaurants()
+        public ActionResult<Restaurant> DisplayAllRestaurants()
         {
             var _rest = new List<Restaurant>();
             try
@@ -42,12 +45,16 @@ namespace API.Controllers
 
             return Ok(_rest);
         }
-
+        /// <summary>
+        /// seach restaurant by name it can be fixable
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         [HttpGet("Find A Restaurant by Name")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         //[Authorize]
-        public ActionResult<Restaurant> GetSearchRestaurantsName([FromQuery] string name)
+        public ActionResult<Restaurant> SearchRestaurantsName([FromQuery] string name)
         {
             var _rest = new List<Restaurant>();
             try
@@ -62,34 +69,52 @@ namespace API.Controllers
 
             return Ok(_rest);
         }
-
+        /// <summary>
+        /// adding a review
+        /// 1st check if we got all input
+        /// 2nt check if we have the right restaurant
+        /// 3th check if we have the right user
+        /// 4th check get user id using the username
+        /// 5th check if any old review where found if so delete them
+        /// 6th add the rate and review
+        /// </summary>
+        /// <param name="Restaurant_ID"></param>
+        /// <param name="UserName"></param>
+        /// <param name="Rate_The_Restaurant_1thourgh5"></param>
+        /// <param name="Leave_A_Review"></param>
+        /// <returns></returns>
         [HttpPost("Add A Review")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult PostReview([FromQuery] string Restaurant_ID, [FromQuery] string UserName, [FromQuery] float Rate_The_Restaurant_1thourgh5, string Leave_A_Review)
+        public ActionResult AddAReview([FromQuery] string Restaurant_ID, [FromQuery] string UserName, [FromQuery] float Rate_The_Restaurant_1thourgh5, string Leave_A_Review)
         {
             if (Restaurant_ID == null)
             { return BadRequest("Please input a Restaruant ID"); }
+
             if (UserName == null)
             { return BadRequest("Please input your username"); }
-            var r = _restLogic.SearchRestaurant("Id", Restaurant_ID);
-            if (r.Count != 1)
+
+            var restaurant = _restLogic.SearchRestaurant("Id", Restaurant_ID);
+
+            if (restaurant.Count != 1)
                 return BadRequest("Restaurant you tried to rate did not exist");
-            var u = _userLogic.SearchUserAll("UserName", UserName);
+
+            var user = _userLogic.SearchUserAll("UserName", UserName);
+
             string getuserid = "";
-            if (u.Count != 1)
+            if (user.Count != 1)
                 return BadRequest("user not found");
-            foreach (var i in u)
+            foreach (var u in user)
             {
-                getuserid = i.ReviewerId;
+                getuserid = u.ReviewerId;//get the user id
             }
 
             if (Rate_The_Restaurant_1thourgh5 > 5 || Rate_The_Restaurant_1thourgh5 < 0)
                 return BadRequest("Please input a valid rate from 1-5");
 
-            var re = _revLogic.DisplayReview("ReviewerId", getuserid);
+            var re = _userLogic.DisplayReview("ReviewerId", getuserid);
             if (re.Count > 0)
-                _revLogic.DeleteReview("Id", Restaurant_ID, "ReviewerId", getuserid);
+                _userLogic.DeleteReview("Id", Restaurant_ID, "ReviewerId", getuserid);
 
             rev.Id = Restaurant_ID;
             rev.ReviewerId = getuserid;

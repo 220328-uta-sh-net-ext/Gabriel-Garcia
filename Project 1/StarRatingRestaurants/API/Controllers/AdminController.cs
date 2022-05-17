@@ -23,17 +23,17 @@ namespace API.Controllers
 
         private readonly IRestaurantLogic _restLogic;
         private readonly IUserLogic _userLogic;
-        private IReviewLogic _revLogic;
+        //private IReviewLogic _revLogic;
 
         private readonly IMemoryCache _mempryCache;
         private readonly IJWTManagerRepository _repo;
 
-        public AdminController(IJWTManagerRepository _repo, IRestaurantLogic _restLogic, IUserLogic _userLogic, IReviewLogic _revLogic, IMemoryCache _mempryCache)
+        public AdminController(IJWTManagerRepository _repo, IRestaurantLogic _restLogic, IUserLogic _userLogic, IMemoryCache _mempryCache)
         {
             this._repo = _repo;
             this._restLogic = _restLogic;
             this._userLogic = _userLogic;
-            this._revLogic = _revLogic;
+            //this._revLogic = _revLogic;
             this._mempryCache = _mempryCache;
         }
 
@@ -46,10 +46,11 @@ namespace API.Controllers
             var token = _repo.Authenticate(user);
             if (token == null)
                 return Unauthorized();
+            AuthorizationPolicy.ReferenceEquals(user.UserName, UserName);
             return Ok(token);
         }
 
-        [Authorize]
+        [Authorize(Roles = "AdminMenu")]
         [HttpGet("Display All User")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -69,7 +70,7 @@ namespace API.Controllers
             return Ok(_user);
         }
 
-        [Authorize(Roles ="Admin")]
+        [Authorize(Roles = "AdminMenu")]
         [HttpGet("Search User By UserName")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -88,7 +89,7 @@ namespace API.Controllers
             return Ok(_user);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "AdminMenu")]
         [HttpGet("Display All Restaurants")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -107,7 +108,7 @@ namespace API.Controllers
             return Ok(_rest);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "AdminMenu")]
         [HttpGet("Find A Restaurant by Name")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -129,7 +130,7 @@ namespace API.Controllers
         }
 
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "AdminMenu")]
         [HttpPost("Add A Restaurant")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -159,7 +160,7 @@ namespace API.Controllers
         }
 
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "AdminMenu")]
         [HttpDelete("Delete A Restaurant")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -174,7 +175,7 @@ namespace API.Controllers
             return Ok($"Restaurant was deleted ");
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "AdminMenu")]
         [HttpPost("Add A Review")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -199,9 +200,9 @@ namespace API.Controllers
             if (Rate_The_Restaurant_1thourgh5 > 5 || Rate_The_Restaurant_1thourgh5 < 0)
                 return BadRequest("Please input a valid rate from 1-5");
 
-            var re = _revLogic.DisplayReview("ReviewerId", getuserid);
+            var re = _userLogic.DisplayReview("ReviewerId", getuserid);
             if (re.Count > 0)
-                _revLogic.DeleteReview("Id", Restaurant_ID, "ReviewerId", getuserid);
+                _userLogic.DeleteReview("Id", Restaurant_ID, "ReviewerId", getuserid);
 
             rev.Id = Restaurant_ID;
             rev.ReviewerId = getuserid;

@@ -16,12 +16,12 @@ namespace API.Controllers
         private readonly IRestaurantLogic _restLogic;
         private readonly IUserLogic _userLogic;
         private readonly IMemoryCache _mempryCache;
-        private IReviewLogic _revLogic;
-        public GuestController(IRestaurantLogic _restLogic, IUserLogic _userLogic, IReviewLogic _revLogic, IMemoryCache _mempryCache)
+        //private IReviewLogic _revLogic;
+        public GuestController(IRestaurantLogic _restLogic, IUserLogic _userLogic, IMemoryCache _mempryCache)
         {
             this._restLogic = _restLogic;
             this._userLogic = _userLogic;
-            this._revLogic = _revLogic;
+            //this._revLogic = _revLogic;
             this._mempryCache = _mempryCache;
         }
 

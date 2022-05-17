@@ -21,6 +21,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\API\API.csproj" />
+    <ProjectReference Include="..\BL\BL.csproj" />
+    <ProjectReference Include="..\DL\DL.csproj" />
     <ProjectReference Include="..\Models\Models.csproj" />
   </ItemGroup>
 

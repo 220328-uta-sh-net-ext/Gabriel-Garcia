@@ -117,7 +117,6 @@ namespace DL
             await connection.CloseAsync();
             return vRestaurant;
         }
-
         public async Task<List<Restaurant>> SearchRestaurantsAsync(string WhereIt, string equalsTo)
         {
             string selectCommandString = $"SELECT * FROM Restaurants WHERE {WhereIt} = '{equalsTo}'";

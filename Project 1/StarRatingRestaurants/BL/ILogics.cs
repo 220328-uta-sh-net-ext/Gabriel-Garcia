@@ -20,8 +20,11 @@ namespace BL
         List<User> SearchUser(string whereIt, string equalsTo); 
         List<User> SearchUserAll(string whereIt, string equalsTo);
         List<User> DisplayAllUser();
+        List<Reviews> DisplayReview(string whereIt, string equalsTo);
         void DeleteUser(string user,string id);
         string LogingIn(User user);
+        void DeleteReview(string whereIt, string equalsTo, string whereItU, string equalsToU);
+
         // async
         Task<User> AddUserAsync(User u);
         Task<Reviews> AddReviewsAsync(Reviews rev);
@@ -31,7 +34,7 @@ namespace BL
         Task<List<User>> DisplayAllUserAsync();
 
     }
-    public interface IReviewLogic
+    /*public interface IReviewLogic
     {
         void DeleteReview(string whereIt, string equalsTo, string whereItU, string equalsToU);
         List<Reviews> DisplayReview(string whereIt, string equalsTo);
@@ -45,5 +48,5 @@ namespace BL
         List<Location> SearchRestLocation(string whereIt, string equalsTo);
         Task<List<Location>> SearchRestLocationAsync(string whereIt, string equalsTo);
         Task<List<Location>> DisplayAllRestLocationAsync();
-    }
+    }*/
 }

@@ -16,7 +16,7 @@ namespace API.Controllers
     public class LoginController : ControllerBase
     {
 
-        //static readonly User user = new();
+        static readonly User user = new();
         //private IUserLogic _userLogic;
         //private IRestaurantLogic _restLogic;
         //private IReviewLogic _revLogic;
@@ -36,6 +36,19 @@ namespace API.Controllers
                 return Unauthorized();
             return Ok(token);
         }
+        //[AllowAnonymous]
+        [HttpPost]
+        [Route("UserLogin")]
+        public IActionResult AdminLogin([FromQuery] string UserName, string Password)
+        {
+            user.UserName = UserName;
+            user.Password = Password;
+            var token = _repo.Authenticate(user);
+            if (token == null)
+                return Unauthorized();
+            return Ok(token);
+        }
+
         /*//[AllowAnonymous]
         [HttpPost]
         [Route("User")]

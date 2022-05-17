@@ -59,7 +59,7 @@ namespace API.Controllers
         /// <param name="name"></param>
         /// <returns></returns>
         /// [Authorize(Roles = "UserMenu")]
-        [HttpGet("Find A Restaurant by Name")]
+        [HttpGet("Find A Restaurant by Id")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<Restaurant> SearchRestaurantsName([FromQuery] string name)
@@ -67,7 +67,7 @@ namespace API.Controllers
             var _rest = new List<Restaurant>();
             try
             {
-                _rest = _restLogic.SearchRestaurant("Name", name);
+                _rest = _restLogic.SearchRestaurant("Id", name);
                 _mempryCache.Set("restlist", _rest, new TimeSpan(0, 1, 0));
                 if (_rest.Count <= 0)
                     return NotFound("Restaurant not Found");

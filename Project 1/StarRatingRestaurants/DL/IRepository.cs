@@ -17,6 +17,7 @@ namespace DL
     {
         User AddUser(User user);
         List<User> SearchUser(string WhereIt, string equalsTo);
+        List<User> SearchUserAdmin(string WhereIt, string equalsTo);
         List<User> DisplayAllUser();
         void DeleteUser(string user);
         // A-Sync

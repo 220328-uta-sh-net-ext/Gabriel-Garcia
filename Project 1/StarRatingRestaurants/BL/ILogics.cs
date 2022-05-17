@@ -4,7 +4,7 @@ namespace BL
 {
     public interface IRestaurantLogic
     {
-        Restaurant AddRestaurant(Restaurant r);
+        void AddRestaurant(Restaurant r, Location l);
         List<Restaurant> SearchRestaurant(string whereIt, string equalsTo);
         List<Restaurant> DisplayAllRestaurants();
         void DeleteRestaurant(string id);
@@ -12,20 +12,22 @@ namespace BL
         Task<Restaurant> AddRestaurantAsync(Restaurant r);
         Task<List<Restaurant>> SearchRestaurantAsync(string whereIt, string equalsTo);
         Task<List<Restaurant>> DisplayAllRestaurantsAsync();
-        Task<List<Type>> TDisplayAllRestaurantsAsync();
     }
     public interface IUserLogic
     {
         User AddUser(User u);
         Reviews AddReviews(Reviews rev);
-        List<User> SearchUser(string whereIt, string equalsTo);
+        List<User> SearchUser(string whereIt, string equalsTo); 
+        List<User> SearchUserAll(string whereIt, string equalsTo);
         List<User> DisplayAllUser();
         void DeleteUser(string user,string id);
-        string LogingIn(string user,string pass);
+        string LogingIn(User user);
         // async
         Task<User> AddUserAsync(User u);
         Task<Reviews> AddReviewsAsync(Reviews rev);
         Task<List<User>> SearchUserAsync(string whereIt, string equalsTo);
+        Task<string> SearchUserPasswordAsync(string equalsTo);
+        Task<string> SearchUserNameAsync(string equalsTo);
         Task<List<User>> DisplayAllUserAsync();
 
     }

@@ -61,7 +61,32 @@ namespace DL
         }
         public List<User> SearchUser(string WhereIt, string equalsTo)
         {
-            string command = $"SELECT * FROM Users WHERE {WhereIt} = '{equalsTo}'";
+
+            string command = $"SELECT * FROM Users WHERE {WhereIt} = '{equalsTo}' AND UserName != 'Admin';";
+            using SqlConnection connection = new(sConnectToDatabase);
+            using SqlCommand sqlCommand = new(command, connection);
+            connection.Open();
+            using SqlDataReader reader = sqlCommand.ExecuteReader();
+            var user = new List<User>();
+            while (reader.Read())
+            {
+                user.Add(new User
+                {
+                    FirstName = reader.GetString(0),
+                    LastName = reader.GetString(1),
+                    Email = reader.GetString(2),
+                    UserName = reader.GetString(3),
+                    Password = reader.GetString(4),
+                    ReviewerId = reader.GetString(5)
+                });
+            }
+            connection.Close();
+            return user;
+        }
+        public List<User> SearchUserAdmin(string WhereIt, string equalsTo)
+        {
+
+            string command = $"SELECT * FROM Users WHERE {WhereIt} = '{equalsTo}';";
             using SqlConnection connection = new(sConnectToDatabase);
             using SqlCommand sqlCommand = new(command, connection);
             connection.Open();

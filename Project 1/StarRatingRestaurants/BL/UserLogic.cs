@@ -40,16 +40,16 @@ namespace BL
             List<Reviews>? reviews = repoRev.DisplayReviews(whereIt, equalsTo);
             return reviews;
         }
-        public string LogingIn(string user, string pass)
+        public string LogingIn(User user)
         {
-            List<User>? getUser = repo.SearchUser("UserName", user);
-            if (getUser.Count > 0 && getUser.Count == 1)
+            List<User>? getUser = repo.SearchUserAdmin("UserName", user.UserName);
+            if (getUser.Count > 0)
             {
                 foreach (var u in getUser)
                 {
-                    if (user == "Admin" && pass == u.Password)
+                    if (user.UserName == "Admin" && user.Password == u.Password)
                     { return "AdminMenu"; }
-                    else if (pass == u.Password)
+                    else if (user.Password == u.Password)
                     { return "UserMenu"; }
                     else
                     {
@@ -69,6 +69,11 @@ namespace BL
         public List<User> SearchUser(string whereIt, string equalsTo)
         {
             List<User>? user = repo.SearchUser(whereIt, equalsTo);
+            return user;
+        }
+        public List<User> SearchUserAll(string whereIt, string equalsTo)
+        {
+            List<User>? user = repo.SearchUserAdmin(whereIt, equalsTo);
             return user;
         }
         //--------------------------Async-------------------------
@@ -91,7 +96,27 @@ namespace BL
         public async Task<List<User>> SearchUserAsync(string whereIt, string equalsTo)
         {
             List<User>? user = await repo.SearchUserAsync(whereIt, equalsTo);
-            return user; ;
+            return user;
+        }
+        public async Task<string> SearchUserNameAsync(string equalsTo)
+        {
+            List<User>? user = await repo.SearchUserAsync("UserName", equalsTo);
+            if (user.Count > 0)
+            {
+                string userName = user[0].UserName;
+                return userName;
+            }
+            return "";
+        }
+        public async Task<string> SearchUserPasswordAsync(string equalsTo)
+        {
+            List<User>? user = await repo.SearchUserAsync("UserName", equalsTo);
+            if (user.Count > 0)
+            {
+                string userPass = user[0].Password;
+                return userPass;
+            }
+            return "";
         }
 
         public async Task<List<User>> DisplayAllUserAsync()

@@ -4,6 +4,7 @@ using System.Runtime.Serialization;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 using BL;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API.Controllers
 {
@@ -11,49 +12,92 @@ namespace API.Controllers
     [ApiController]
     public class GuestController : ControllerBase
     {
-        private IRestaurantLogic _restLogic;
-        //private IReviewLogic _revLogic;
-        private IMemoryCache _mempryCache;
-        public GuestController(IRestaurantLogic _restLogic, /*IReviewLogic _revLogic,*/ IMemoryCache _mempryCache)
+        static readonly User user = new();
+        private readonly IRestaurantLogic _restLogic;
+        private readonly IUserLogic _userLogic;
+        private readonly IMemoryCache _mempryCache;
+        private IReviewLogic _revLogic;
+        public GuestController(IRestaurantLogic _restLogic, IUserLogic _userLogic, IReviewLogic _revLogic, IMemoryCache _mempryCache)
         {
             this._restLogic = _restLogic;
-            //this._revLogic = _revLogic;
+            this._userLogic = _userLogic;
+            this._revLogic = _revLogic;
             this._mempryCache = _mempryCache;
         }
 
-        [HttpGet]
+        [HttpGet("Display All Restaurants")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<List<Type>>> Get()
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<Restaurant> GetDisplayAllRestaurants()
         {
-            List<Type> _rest = new List<Type>();
+            var _rest = new List<Restaurant>();
             try
             {
-                if (!_mempryCache.TryGetValue("restlist", out _rest))
-                {
-                    _rest = await _restLogic.TDisplayAllRestaurantsAsync();
-                    _mempryCache.Set("restlist", _rest, new TimeSpan(0, 1, 0));
-                }
+                _rest = _restLogic.DisplayAllRestaurants();
+                _mempryCache.Set("restlist", _rest, new TimeSpan(0, 1, 0));
+
             }
-            catch (SqlExceptions ex)
-            { return BadRequest(ex.Message); }
             catch (Exception ex)
             { return BadRequest(ex.Message); }
 
             return Ok(_rest);
         }
 
-
-        [HttpGet("name")]
+        [HttpGet("Find A Restaurant by Name")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<Restaurant> Get(string name)
+        //[Authorize]
+        public ActionResult<Restaurant> GetSearchRestaurantsName([FromQuery] string name)
         {
-            if (name == null)
-                return BadRequest("Enter a name please");
-            var rest = _restLogic.SearchRestaurant("Name", name);
-            if (rest.Count <= 0)
-                return NotFound("Restaurant not Found");
-            return Ok(rest);
+            var _rest = new List<Restaurant>();
+            try
+            {
+                _rest = _restLogic.SearchRestaurant("Name", name);
+                _mempryCache.Set("restlist", _rest, new TimeSpan(0, 1, 0));
+                if (_rest.Count <= 0)
+                    return NotFound("Restaurant not Found");
+            }
+            catch (Exception ex)
+            { return BadRequest(ex.Message); }
+
+            return Ok(_rest);
+        }
+
+        [HttpPost("Add A User")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult AddUser([FromQuery] string First_Name, string Last_Name, string Email, string User_Name, string Password)
+        {
+            if (User_Name == null || User_Name == "")
+            {
+                return BadRequest("Please input a username");
+            }
+            if (Email == null || Email == "")
+            {
+                return BadRequest("Please input a username");
+            }
+            if (Password == null || Password == "")
+            { return BadRequest("Please input a password"); }
+
+            var u = _userLogic.SearchUserAll("UserName", User_Name);
+            if (u.Count > 0)
+            { return BadRequest("Sorry! But the UserName you inputed is in use"); }
+            if (u.Count == 0)
+            {
+                DateTime localDate = DateTime.Now;
+                user.ReviewerId = localDate.Year.ToString() + localDate.Month.ToString() + localDate.Day.ToString() + localDate.Hour.ToString() + localDate.Minute.ToString() + User_Name.Last();
+
+                user.FirstName = "" + First_Name;
+                user.LastName = "" + Last_Name;
+                user.Email = Email;
+                user.UserName = User_Name;
+                user.Password = Password;
+
+                _userLogic.AddUser(user);
+                return Ok($"Your Review was added.");
+
+            }
+            return BadRequest("Something gone wrong!");
         }
 
     }

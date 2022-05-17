@@ -36,8 +36,13 @@ namespace API.Controllers
             //this._revLogic = _revLogic;
             this._mempryCache = _mempryCache;
         }
-
-        [HttpPost]
+        /// <summary>
+        /// in class contoller login 
+        /// </summary>
+        /// <param name="UserName"></param>
+        /// <param name="Password"></param>
+        /// <returns></returns>
+        /*[HttpPost]
         [Route("Admin")]
         public IActionResult AdminLogin([FromQuery] string UserName, string Password)
         {
@@ -45,11 +50,18 @@ namespace API.Controllers
             user.Password = Password;
             var token = _repo.Authenticate(user);
             if (token == null)
-                return Unauthorized();
+            { return Unauthorized();
+                Log.Information("Admin fail to login");
+            }
             AuthorizationPolicy.ReferenceEquals(user.UserName, UserName);
-            return Ok(token);
-        }
 
+            Log.Information("Admin login");
+            return Ok(token);
+        }*/
+        /// <summary>
+        /// display all user will ignoring admin, and passwords
+        /// </summary>
+        /// <returns></returns>
         [Authorize(Roles = "AdminMenu")]
         [HttpGet("Display All User")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -62,15 +74,23 @@ namespace API.Controllers
             {
                 _user = _userLogic.DisplayAllUser();
                 _mempryCache.Set("restlist", _user, new TimeSpan(0, 1, 0));
-
+                Log.Information("try print user");
             }
             catch (Exception ex)
-            { return BadRequest(ex.Message); }
+            { return BadRequest(ex.Message);
+                Log.Information("fail user print");
+            }
 
+            Log.Information("print user");
             return Ok(_user);
         }
+        /// <summary>
+        /// get a single user using there username
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
 
-        [Authorize(Roles = "AdminMenu")]
+        //[Authorize(Roles = "AdminMenu")]
         [HttpGet("Search User By UserName")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -86,10 +106,16 @@ namespace API.Controllers
             catch (Exception ex)
             { return BadRequest(ex.Message); }
 
+
+            Log.Information("print user");
             return Ok(_user);
         }
+        /// <summary>
+        /// get and display all the restaurant in the database
+        /// </summary>
+        /// <returns></returns>
 
-        [Authorize(Roles = "AdminMenu")]
+        //[Authorize(Roles = "AdminMenu")]
         [HttpGet("Display All Restaurants")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -105,10 +131,16 @@ namespace API.Controllers
             catch (Exception ex)
             { return BadRequest(ex.Message); }
 
+
+            Log.Information("print restaurants");
             return Ok(_rest);
         }
-
-        [Authorize(Roles = "AdminMenu")]
+        /// <summary>
+        /// display all restaurant with the same name 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        //[Authorize(Roles = "AdminMenu")]
         [HttpGet("Find A Restaurant by Name")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -126,15 +158,26 @@ namespace API.Controllers
             catch (Exception ex)
             { return BadRequest(ex.Message); }
 
+
+            Log.Information("print restaurants");
             return Ok(_rest);
         }
+        /// <summary>
+        /// adding a restaurant 
+        /// we set the id inside
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="country"></param>
+        /// <param name="state"></param>
+        /// <param name="city"></param>
+        /// <param name="zip"></param>
+        /// <returns></returns>
 
-
-        [Authorize(Roles = "AdminMenu")]
+        //[Authorize(Roles = "AdminMenu")]
         [HttpPost("Add A Restaurant")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult Post([FromQuery]string name, [FromQuery] string country, [FromQuery] string state, [FromQuery] string city, [FromQuery] string zip)
+        public ActionResult AddARestaurant([FromQuery]string name, [FromQuery] string country, [FromQuery] string state, [FromQuery] string city, [FromQuery] string zip)
         {
             DateTime localDate = DateTime.Now;
             rest.Name = name;
@@ -146,6 +189,8 @@ namespace API.Controllers
             loc.Zipcode = zip;
             
             _restLogic.AddRestaurant(rest,loc);
+
+            Log.Information("add restaurants");
             return Ok($"Restaurant {rest.Name} was added.");
         }
         private int numberOfRestaurant()
@@ -159,8 +204,12 @@ namespace API.Controllers
             return iCount+1;
         }
 
-
-        [Authorize(Roles = "AdminMenu")]
+        /// <summary>
+        /// delete a restaurant 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        //[Authorize(Roles = "AdminMenu")]
         [HttpDelete("Delete A Restaurant")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -172,14 +221,23 @@ namespace API.Controllers
             var rest = _restLogic.SearchRestaurant("Id", id);
             if (rest.Count > 0)
                 return BadRequest("Was Unable to Delete");
+
+            Log.Information("delete restaurants");
             return Ok($"Restaurant was deleted ");
         }
-
-        [Authorize(Roles = "AdminMenu")]
+        /// <summary>
+        /// add a review
+        /// </summary>
+        /// <param name="Restaurant_ID"></param>
+        /// <param name="UserName"></param>
+        /// <param name="Rate_The_Restaurant_1thourgh5"></param>
+        /// <param name="Leave_A_Review"></param>
+        /// <returns></returns>
+        //[Authorize(Roles = "AdminMenu")]
         [HttpPost("Add A Review")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult PostReview([FromQuery] string Restaurant_ID, [FromQuery] string UserName,[FromQuery] float Rate_The_Restaurant_1thourgh5, string Leave_A_Review)
+        public ActionResult AddReview([FromQuery] string Restaurant_ID, [FromQuery] string UserName,[FromQuery] float Rate_The_Restaurant_1thourgh5, string Leave_A_Review)
         {
             if (Restaurant_ID == null)
             { return BadRequest("Please input a Restaruant ID"); }
@@ -210,6 +268,7 @@ namespace API.Controllers
             rev.Review = "" + Leave_A_Review;
 
             _userLogic.AddReviews(rev);
+            Log.Information("add review");
             return Ok($"Your Review was added.");
         }
     }

@@ -1,10 +1,14 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Caching.Memory;
-using System.Runtime.Serialization;
+﻿using Microsoft.Extensions.Caching.Memory;
+using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Http;
+using System.Data;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc;
+using API.Repository;
 using Models;
 using BL;
-using Microsoft.AspNetCore.Authorization;
+//using Microsoft.AspNetCore.Authorization;
 
 namespace API.Controllers
 {
@@ -15,19 +19,23 @@ namespace API.Controllers
         static readonly Reviews rev = new();
         private readonly IRestaurantLogic _restLogic;
         private readonly IUserLogic _userLogic;
+        static readonly User user = new();
         private readonly IMemoryCache _mempryCache;
+        private readonly IJWTManagerRepository _repo;
         //private IReviewLogic _revLogic;
-        public UserController(IRestaurantLogic _restLogic, IUserLogic _userLogic,  IMemoryCache _mempryCache)
+        public UserController(IJWTManagerRepository _repo,IRestaurantLogic _restLogic, IUserLogic _userLogic,  IMemoryCache _mempryCache)
         {
             this._restLogic = _restLogic;
             this._userLogic = _userLogic;
             //this._revLogic = _revLogic;
+            this._repo = _repo;
             this._mempryCache = _mempryCache;
         }
         /// <summary>
         /// display all restaurant from the database
         /// </summary>
         /// <returns></returns>
+        [Authorize(Roles = "UserMenu")]
         [HttpGet("Display All Restaurants")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -50,10 +58,10 @@ namespace API.Controllers
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
+        /// [Authorize(Roles = "UserMenu")]
         [HttpGet("Find A Restaurant by Name")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        //[Authorize]
         public ActionResult<Restaurant> SearchRestaurantsName([FromQuery] string name)
         {
             var _rest = new List<Restaurant>();
@@ -83,6 +91,7 @@ namespace API.Controllers
         /// <param name="Rate_The_Restaurant_1thourgh5"></param>
         /// <param name="Leave_A_Review"></param>
         /// <returns></returns>
+        /// [Authorize(Roles = "UserMenu")]
         [HttpPost("Add A Review")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

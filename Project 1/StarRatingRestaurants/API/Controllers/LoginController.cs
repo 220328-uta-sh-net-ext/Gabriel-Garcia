@@ -28,7 +28,7 @@ namespace API.Controllers
         }
         //[AllowAnonymous]
         [HttpPost]
-        [Route("Admin")]
+        [Route("Loggin")]
         public IActionResult AdminLogin(User user)
         {
             var token = _repo.Authenticate(user);

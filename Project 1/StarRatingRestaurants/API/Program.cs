@@ -1,9 +1,12 @@
+global using Serilog;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using API.Repository;
 using System.Text;
 using BL;
 using DL;
+
+Log.Logger = new LoggerConfiguration().WriteTo.File("./Logs/user.text").CreateLogger();
 
 //sql connectin
 string connectinStrringFilePath = "../SQLConnection.txt";

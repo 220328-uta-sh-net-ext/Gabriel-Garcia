@@ -8,8 +8,10 @@ namespace ZTesting
 {
     public class UnitTest1
     {
-        [Fact]
+        IRestaurantLogic _rest;
+        static readonly Restaurant rest = new();
 
+        [Fact]
         public void ModelTestUser()
         {
             User user = new()
@@ -74,11 +76,15 @@ namespace ZTesting
             Assert.Equal(0, reviews.Rate);
             Assert.Equal("user id", reviews.ReviewerId);
         }
-        [Theory]
-        [InlineData()]
-        public void Test()
-        {
-
-        }
+        //[Theory]
+        //[InlineData("Name", "Cheetah Chow and Grill")]
+        //public void Test(string where, string equal)
+        //{
+        //    _rest.DisplayAllRestaurants();
+        //    //foreach(var i in )
+        //    //Assert.Equal()
+        //    _rest.SearchRestaurant(where,equal);
+        //
+        //}
     }
 }

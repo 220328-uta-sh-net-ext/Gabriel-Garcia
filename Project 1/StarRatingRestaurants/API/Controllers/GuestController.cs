@@ -24,11 +24,15 @@ namespace API.Controllers
             //this._revLogic = _revLogic;
             this._mempryCache = _mempryCache;
         }
+        /// <summary>
+        /// display all restaurants
+        /// </summary>
+        /// <returns></returns>
 
         [HttpGet("Display All Restaurants")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<Restaurant> GetDisplayAllRestaurants()
+        public ActionResult<Restaurant> DisplayAllRestaurants()
         {
             var _rest = new List<Restaurant>();
             try
@@ -42,12 +46,16 @@ namespace API.Controllers
 
             return Ok(_rest);
         }
-
+        /// <summary>
+        /// find a restrant using name
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         [HttpGet("Find A Restaurant by Name")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         //[Authorize]
-        public ActionResult<Restaurant> GetSearchRestaurantsName([FromQuery] string name)
+        public ActionResult<Restaurant> SearchRestaurantsName([FromQuery] string name)
         {
             var _rest = new List<Restaurant>();
             try
@@ -62,7 +70,15 @@ namespace API.Controllers
 
             return Ok(_rest);
         }
-
+        /// <summary>
+        /// add a user if username not found
+        /// </summary>
+        /// <param name="First_Name"></param>
+        /// <param name="Last_Name"></param>
+        /// <param name="Email"></param>
+        /// <param name="User_Name"></param>
+        /// <param name="Password"></param>
+        /// <returns></returns>
         [HttpPost("Add A User")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

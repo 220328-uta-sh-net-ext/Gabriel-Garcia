@@ -8,6 +8,7 @@ namespace BL
         List<Restaurant> SearchRestaurant(string whereIt, string equalsTo);
         List<Restaurant> DisplayAllRestaurants();
         void DeleteRestaurant(string id);
+        string GetRestaurant(string id);
         // async
         Task<Restaurant> AddRestaurantAsync(Restaurant r);
         Task<List<Restaurant>> SearchRestaurantAsync(string whereIt, string equalsTo);

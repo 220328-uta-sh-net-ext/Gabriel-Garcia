@@ -8,7 +8,11 @@ namespace BL
         readonly IRepositoryR repo;
         readonly IRepositoryRev repoRev;
         readonly IRepositoryLoc repoLoc;
-        
+
+        static  Restaurant rest = new();
+        static  Reviews rev = new();
+        static  List<Reviews> rev2 = new();
+        static List<Restaurant> rest2 = new();
         public RestaurantLogic(IRepositoryR repo, IRepositoryRev repoRev, IRepositoryLoc repoLoc)
         {
             this.repo = repo;
@@ -141,15 +145,48 @@ namespace BL
             }
             return newRestaurant;
         }
+
+        public string GetRestaurant(string id)
+        {
+            int rate = 0;
+            int rCount = 0;
+            string name = "";
+            rest2 = repo.SearchRestaurants("Id", id);
+            foreach (var i in rest2)
+            {
+                name = i.Name;
+            }
+
+            rev2 = repoRev.DisplayReviews("Id", id);
+            foreach(var i in rev2)
+            {
+                rate += i.Rate;
+                rCount++;
+            }
+            float total = rate / (rCount * 5.0f);
+            if (total > 0.9)
+            { total = 5; }
+            else if (total > 0.8)
+            { total = 4; }
+            else if (total > 0.6)
+            { total = 3; }
+            else if (total > 0.4)
+            { total = 2; }
+            else if (total > 0.2)
+            { total = 1; }
+            else total = 0;
+
+                                return $"Restaurant: {name} Rate: {total} ";
+        }
         //public async Task<List<Reviews>> DisplayReviewAsync(string whereIt, string equalsTo)
         //{
         //    List<Reviews>? reviews = await repoRev.DisplayReviewsAsync(whereIt, equalsTo);
         //    return reviews;
         //}
-       // public async Task<List<Location>> DisplayAllRestLocationAsync()
-       // {
-       //     List<Location>? location = await repoLoc.DisplayAllRestLocationAsync();
-       //     return location;
-       // }
+        // public async Task<List<Location>> DisplayAllRestLocationAsync()
+        // {
+        //     List<Location>? location = await repoLoc.DisplayAllRestLocationAsync();
+        //     return location;
+        // }
     }
 }

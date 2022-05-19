@@ -271,5 +271,26 @@ namespace API.Controllers
             Log.Information("add review");
             return Ok($"Your Review was added.");
         }
+        /// <summary>
+        /// get a reviews
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("See Review")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult SeeReview([FromQuery] string id)
+        {
+            string revew = "";
+            try
+            {
+                revew = _restLogic.GetRestaurant(id);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Didn't find the restaurnat: " + ex.Message);
+            }
+            return Ok(revew);
+        }
     }
 }

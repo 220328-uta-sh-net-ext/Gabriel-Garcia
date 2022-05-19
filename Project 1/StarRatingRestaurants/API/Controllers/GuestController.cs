@@ -115,6 +115,11 @@ namespace API.Controllers
             }
             return BadRequest("Something gone wrong!");
         }
+        /// <summary>
+        /// get a reviews
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("See Review")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

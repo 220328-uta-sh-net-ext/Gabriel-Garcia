@@ -1,0 +1,17 @@
+body {
+    background-color: aliceblue;
+}
+
+h1 {
+    color: aqua;
+    background-color: cadetblue;
+}
+
+main {
+    color: lightblue;
+    background-color: rgb(34, 32, 32);
+}
+
+footer {
+    bottom: bottom;
+}

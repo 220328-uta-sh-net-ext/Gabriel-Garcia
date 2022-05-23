@@ -8,9 +8,9 @@ using DL;
 
 Log.Logger = new LoggerConfiguration().WriteTo.File("./Logs/user.text").CreateLogger();
 
-//sql connectin
-string connectinStrringFilePath = "../SQLConnection.txt";
-string connectinStrring = File.ReadAllText(connectinStrringFilePath);
+//sql connection string from text file
+//string connectinStrringFilePath = "../SQLConnection.txt";
+//string connectinStrring = File.ReadAllText(connectinStrringFilePath);
 
 
 
@@ -45,10 +45,10 @@ builder.Services.AddSwaggerGen();
 
 //builder.Services.AddSingleton<IJWTManagerRepository, JWTManagerRepository>();
 
-builder.Services.AddScoped<IRepositoryR>(repoR => new RepoRestaurants(connectinStrring));
-builder.Services.AddScoped<IRepositoryU>(repoU => new RepoUsers(connectinStrring));
-builder.Services.AddScoped<IRepositoryRev>(repoRev => new RepoReview(connectinStrring));
-builder.Services.AddScoped<IRepositoryLoc>(repoLoc => new RepoLocation(connectinStrring));
+builder.Services.AddScoped<IRepositoryR>(repoR => new RepoRestaurants(Config.GetConnectionString("RestaurantDb")));
+builder.Services.AddScoped<IRepositoryU>(repoU => new RepoUsers(Config.GetConnectionString("RestaurantDb")));
+builder.Services.AddScoped<IRepositoryRev>(repoRev => new RepoReview(Config.GetConnectionString("RestaurantDb")));
+builder.Services.AddScoped<IRepositoryLoc>(repoLoc => new RepoLocation(Config.GetConnectionString("RestaurantDb")));
 
 builder.Services.AddScoped<IRestaurantLogic, RestaurantLogic>();
 //builder.Services.AddScoped<IReviewLogic, RestaurantLogic>();

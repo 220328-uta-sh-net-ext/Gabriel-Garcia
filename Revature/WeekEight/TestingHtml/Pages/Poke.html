@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="http://cdn.jsdelivr.net/npm/bootstrap@5.2.0-betal/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="StyleSheet" href="../CSS/Home.css" />
     <title>Document</title>
 </head>
@@ -16,16 +17,17 @@
         <a href="Poke.html">Poke</a>
         <a href="User.html">User</a>
     </header>
-    <main>
+    <main class="container">
         <h1>pokemons search</h1>
         <form>
             <label for="pokemonName">Pokemon name: </label>
             <input id="pokemonName" type="search">
         </form>
-        <button onclick="getPoky()">Search</button>
+        <button onclick="getPokyTwo()">Search</button>
         <div id="pokeResults">
-            <img id="pokeImage">
+            <img id="pokeImage" src="">
             <!-- <img id="pokeImage" src="" width="100" height="100"> -->
+            <ul id="abilities"></ul>
         </div>
     </main>
     <script src="../JS/Poky.js"></script>

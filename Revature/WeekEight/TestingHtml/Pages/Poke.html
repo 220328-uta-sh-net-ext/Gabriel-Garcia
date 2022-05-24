@@ -10,7 +10,6 @@
 </head>
 
 <body>
-    <script type="JaveScript" src="../JS/Home.js"></script>
     <header>
         <h1>Poky 1</h1>
         <a href="Home.html">Home</a>
@@ -18,8 +17,18 @@
         <a href="User.html">User</a>
     </header>
     <main>
-
+        <h1>pokemons search</h1>
+        <form>
+            <label for="pokemonName">Pokemon name: </label>
+            <input id="pokemonName" type="search">
+        </form>
+        <button onclick="getPoky()">Search</button>
+        <div id="pokeResults">
+            <img id="pokeImage">
+            <!-- <img id="pokeImage" src="" width="100" height="100"> -->
+        </div>
     </main>
+    <script src="../JS/Poky.js"></script>
     <footer>&copy; this is the footer </footer>
 </body>
 

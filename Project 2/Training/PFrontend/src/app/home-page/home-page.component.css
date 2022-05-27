@@ -1,0 +1,10 @@
+.home-page {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+}
+
+.home-massage {
+    width: 80%;
+}

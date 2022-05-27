@@ -1,0 +1,39 @@
+<div id="pokedex-main">
+    <h1> Pokemon Available in the Database</h1>
+    <div id="pokemon-container">
+        <!-- <div class="pokemon">
+            <h2>
+                {{pokemon[0].name}}
+            </h2>
+            <h4>Level: {{pokemon[0].level}}</h4>
+            <h4>attack: {{pokemon[0].attack}}</h4>
+            <h4>defense: {{pokemon[0].defense}}</h4>
+            <h4>health: {{pokemon[0].health}}</h4>
+        </div>
+        <div class="pokemon">
+            <h2>
+                {{pokemon[1].name}}
+            </h2>
+            <h4>Level: {{pokemon[1].level}}</h4>
+            <h4>attack: {{pokemon[1].attack}}</h4>
+            <h4>defense: {{pokemon[1].defense}}</h4>
+            <h4>health: {{pokemon[1].health}}</h4>
+        </div> -->
+
+        <!-- <div class="pokemon" pokemon *ngFor="let poke of pokemon">
+            <h2> {{poke.name}} </h2>
+            <h4>Level: {{poke.level}}</h4>
+            <h4>attack: {{poke.attack}}</h4>
+            <h4>defense: {{poke.defense}}</h4>
+            <h4>health: {{poke.health}}</h4>
+        </div> -->
+
+        <pokemon *ngFor="let poke1 of pokemon" [poke]="poke1"></pokemon>
+    </div>
+    <button (click)="ShowOrHidePokemonForm()">{{buttonText}}</button>
+    <new-pokemon [hidden]="hide" (sendPokemon)="getPokemonFromNewPokemon($event)"></new-pokemon>
+    <!-- <div [hidden]="hide">
+        <p>hiden</p>
+    </div> -->
+
+</div>

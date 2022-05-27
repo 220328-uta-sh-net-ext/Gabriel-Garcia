@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 
 import { HomePageComponent } from './home-page.component';
 
@@ -22,4 +23,8 @@ describe('HomePageComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('should creat an h1 equal to "Welcome To Our Pokemon Website"',()=>{
+    const h1 = fixture.debugElement.query(By.css('h1')).nativeElement
+    expect(h1.innerHTML).toBe("Welcome To Our Pokemon Website");
+  })
 });

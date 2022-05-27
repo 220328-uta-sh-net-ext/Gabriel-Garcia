@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePageComponent implements OnInit {
 
-  welcomeMessage:string = "Welcome to our Pokemon Website"
+  welcomeMessage:string = "Welcome To Our Pokemon Website"
   constructor() { 
     console.log("home page made")
   }
